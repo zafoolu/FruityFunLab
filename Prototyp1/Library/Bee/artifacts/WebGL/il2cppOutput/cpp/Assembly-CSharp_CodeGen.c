@@ -1,0 +1,83 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void Draggable_OnBeginDrag_mFE3AC23984FED6B8A5F96EC788DBB46C3DA66D14 (void);
+extern void Draggable_OnDrag_m58222CD87D9043D8115584B0170984E6AB263E5B (void);
+extern void Draggable_OnEndDrag_mF1D5D58134C5724B1C7AB2FBEE7D190B1683DB0D (void);
+extern void Draggable__ctor_m26C671B6AAE39AAEF5DB0391B23F84A9C598E764 (void);
+extern void DropZone_OnPointerEnter_mB19A8724DA420CB6ED26E418C329DDC98472F0C9 (void);
+extern void DropZone_OnPointerExit_m1B711F5C64FBD32DD63E170683F291B003E0809E (void);
+extern void DropZone_OnDrop_mC65B46401741E5F61624EEAD23E0E04D7B231326 (void);
+extern void DropZone__ctor_mFB640A2775CD8C30FED3BC34972BE284BDA46497 (void);
+extern void Hand_OnPointerEnter_mB27143AEA1F1D2ABD43837836C181DC3AAA38E41 (void);
+extern void Hand_OnPointerExit_mAA5AA3AC1E69266992B22BFA16664DFB752A8B43 (void);
+extern void Hand_OnDrop_m585F14330FB0190F99A90F34768EF9FA2A7684B6 (void);
+extern void Hand__ctor_m98922058C1A056306D560A36EAEDCE0247110FA8 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1 (void);
+static Il2CppMethodPointer s_methodPointers[14] = 
+{
+	Draggable_OnBeginDrag_mFE3AC23984FED6B8A5F96EC788DBB46C3DA66D14,
+	Draggable_OnDrag_m58222CD87D9043D8115584B0170984E6AB263E5B,
+	Draggable_OnEndDrag_mF1D5D58134C5724B1C7AB2FBEE7D190B1683DB0D,
+	Draggable__ctor_m26C671B6AAE39AAEF5DB0391B23F84A9C598E764,
+	DropZone_OnPointerEnter_mB19A8724DA420CB6ED26E418C329DDC98472F0C9,
+	DropZone_OnPointerExit_m1B711F5C64FBD32DD63E170683F291B003E0809E,
+	DropZone_OnDrop_mC65B46401741E5F61624EEAD23E0E04D7B231326,
+	DropZone__ctor_mFB640A2775CD8C30FED3BC34972BE284BDA46497,
+	Hand_OnPointerEnter_mB27143AEA1F1D2ABD43837836C181DC3AAA38E41,
+	Hand_OnPointerExit_mAA5AA3AC1E69266992B22BFA16664DFB752A8B43,
+	Hand_OnDrop_m585F14330FB0190F99A90F34768EF9FA2A7684B6,
+	Hand__ctor_m98922058C1A056306D560A36EAEDCE0247110FA8,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1,
+};
+static const int32_t s_InvokerIndices[14] = 
+{
+	3376,
+	3376,
+	3376,
+	4130,
+	3376,
+	3376,
+	3376,
+	4130,
+	3376,
+	3376,
+	3376,
+	4130,
+	5978,
+	4130,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
+const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
+{
+	"Assembly-CSharp.dll",
+	14,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};
