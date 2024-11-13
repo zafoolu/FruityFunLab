@@ -12,9 +12,9 @@ public class Card
     public int value;
     public Sprite cardImage;
     public FoodType foodType;
-    public string Protein;
-    public string Carbs;
-    public string etc;
+    public int Protein;
+    public int Carbs;
+    public int etc;
 }
 
 public class DeckManager : MonoBehaviour             // Deck
@@ -29,6 +29,7 @@ public class DeckManager : MonoBehaviour             // Deck
         if (deck.Count > 0)
         {
             Card drawnCard = deck[0];
+            Debug.Log(drawnCard.Protein);
             deck.RemoveAt(0);
 
             GameObject cardInstance = Instantiate(cardPrefab, handPanel);
