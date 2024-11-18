@@ -9,10 +9,36 @@ public class DeckManager : MonoBehaviour
     public Transform handPanel;
     public GameObject deckImage;
 
+    // Zähler für die Klicks
+    private int clickCount = 0;
+
     void Start()
     {
         // Mische das Deck zu Beginn
         ShuffleDeck();
+    }
+
+    // Funktion, die aufgerufen wird, wenn auf das Deck geklickt wird
+    public void HandleDeckClick()
+    {
+        // Wenn bereits 7 Karten gezogen wurden, breche ab
+        if (clickCount >= 7)
+        {
+            Debug.Log("Du hast bereits 7 Karten gezogen. Weitere Ziehungen sind nicht mehr möglich.");
+            return;
+        }
+
+        // Ziehe eine Karte
+        DrawCard();
+
+        // Erhöhe den Klickzähler
+        clickCount++;
+
+        // Überprüfe, ob die maximale Anzahl der Ziehungen erreicht wurde
+        if (clickCount >= 7)
+        {
+            Debug.Log("Maximale Kartenanzahl (7) erreicht. Weitere Ziehungen sind deaktiviert.");
+        }
     }
 
     // Funktion zum Ziehen einer Karte
@@ -40,6 +66,8 @@ public class DeckManager : MonoBehaviour
             draggable.Calories = drawnCard.Calories;
             draggable.Vitamins = drawnCard.Vitamins;
             draggable.Minerals = drawnCard.Minerals;
+            draggable.foodType = drawnCard.foodType;
+            draggable.points = drawnCard.points;
 
             // Debug-Log, um die Werte der gezogenen Karte zu überprüfen
             Debug.Log($"Gezogene Karte: {drawnCard.cardName} | Protein: {draggable.Protein}, Carbs: {draggable.Carbs}, Etc: {draggable.Etc}");
@@ -89,4 +117,6 @@ public class Card
     public int Calories;
     public int Vitamins;
     public int Minerals;
+    public string foodType;
+    public int points;
 }
