@@ -2,36 +2,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public enum FoodType { Good, Bad }
-
-//Klasse für Karte
-[System.Serializable]
-public class Card
-{
-    public string cardName;
-    public int value;
-    public Sprite cardImage;
-    public FoodType foodType;
-    public int Protein;
-    public int Carbs;
-    public int etc;
-}
-
-public class DeckManager : MonoBehaviour             // Deck
+public class DeckManager : MonoBehaviour
 {
     public List<Card> deck;
     public GameObject cardPrefab;
     public Transform handPanel;
     public GameObject deckImage;
 
-    public void DrawCard() //Draw Funktion
+    void Start()
+    {
+        // Mische das Deck zu Beginn
+        ShuffleDeck();
+    }
+
+    // Funktion zum Ziehen einer Karte
+    public void DrawCard()
     {
         if (deck.Count > 0)
         {
+            // Ziehe die oberste Karte aus dem Deck
             Card drawnCard = deck[0];
-            Debug.Log(drawnCard.Protein);
             deck.RemoveAt(0);
 
+            // Erstelle eine Instanz der Karte im Handbereich
             GameObject cardInstance = Instantiate(cardPrefab, handPanel);
             Image cardImage = cardInstance.GetComponent<Image>();
             if (cardImage != null)
@@ -39,9 +32,19 @@ public class DeckManager : MonoBehaviour             // Deck
                 cardImage.sprite = drawnCard.cardImage;
             }
 
+            // Füge das Draggable-Skript hinzu und setze die Werte
             Draggable draggable = cardInstance.AddComponent<Draggable>();
-            draggable.typeOfFood = (Draggable.Food)drawnCard.foodType;
+            draggable.Protein = drawnCard.Protein;
+            draggable.Carbs = drawnCard.Carbs;
+            draggable.Etc = drawnCard.Etc;
+            draggable.Calories = drawnCard.Calories;
+            draggable.Vitamins = drawnCard.Vitamins;
+            draggable.Minerals = drawnCard.Minerals;
 
+            // Debug-Log, um die Werte der gezogenen Karte zu überprüfen
+            Debug.Log($"Gezogene Karte: {drawnCard.cardName} | Protein: {draggable.Protein}, Carbs: {draggable.Carbs}, Etc: {draggable.Etc}");
+
+            // Deaktiviere das Deckbild, wenn keine Karten mehr vorhanden sind
             if (deck.Count == 0)
             {
                 deckImage.SetActive(false);
@@ -49,7 +52,41 @@ public class DeckManager : MonoBehaviour             // Deck
         }
         else
         {
-            
+            // Falls das Deck leer ist
+            Debug.Log("Deck ist leer!");
         }
     }
+
+    // Methode zum Mischen des Decks
+    private void ShuffleDeck()
+    {
+        System.Random rng = new System.Random(); // Zufallszahlengenerator
+        int n = deck.Count;
+        
+        // Fisher-Yates Shuffle-Algorithmus
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1); // Wählt einen Index zwischen 0 und n (einschließlich)
+            Card value = deck[k];
+            deck[k] = deck[n];
+            deck[n] = value;
+        }
+
+        Debug.Log("Deck gemischt!");
+    }
+}
+
+[System.Serializable]
+public class Card
+{
+    public string cardName;
+    public int value;
+    public Sprite cardImage;
+    public int Protein;
+    public int Carbs;
+    public int Etc;
+    public int Calories;
+    public int Vitamins;
+    public int Minerals;
 }
