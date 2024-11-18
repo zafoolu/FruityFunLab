@@ -22,7 +22,7 @@ public class DeckManager : MonoBehaviour
     public void HandleDeckClick()
     {
         // Wenn bereits 7 Karten gezogen wurden, breche ab
-        if (clickCount >= 7)
+        if (clickCount >= 9)
         {
             Debug.Log("Du hast bereits 7 Karten gezogen. Weitere Ziehungen sind nicht mehr möglich.");
             return;
@@ -35,7 +35,7 @@ public class DeckManager : MonoBehaviour
         clickCount++;
 
         // Überprüfe, ob die maximale Anzahl der Ziehungen erreicht wurde
-        if (clickCount >= 7)
+        if (clickCount >= 9)
         {
             Debug.Log("Maximale Kartenanzahl (7) erreicht. Weitere Ziehungen sind deaktiviert.");
         }

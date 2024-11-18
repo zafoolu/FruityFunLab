@@ -1435,10 +1435,10 @@ MonoBehaviour:
   Minerals: 0
   foodType: 
   points: 0
-  proteinSlider: {fileID: 1565338745}
-  carbsSlider: {fileID: 1656457543}
-  etcSlider: {fileID: 855814898}
-  caloriesSlider: {fileID: 1656301265}
+  proteinSlider: {fileID: 1656457543}
+  carbsSlider: {fileID: 855814898}
+  etcSlider: {fileID: 182078100}
+  caloriesSlider: {fileID: 1565338745}
   vitaminsSlider: {fileID: 182078100}
   mineralsSlider: {fileID: 1343677058}
 --- !u!4 &672013948
@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 32244388}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 350
+  m_MaxValue: 3500
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -4999,7 +4999,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1502808718}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 30
+  m_MaxValue: 300
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -5323,7 +5323,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: "\xF6l/fett"
-    points: 3
+    points: 2
   - cardName: Ente
     value: 4
     cardImage: {fileID: 21300000, guid: 67ba042ef18d59f4b9cb9cef3b3c98ce, type: 3}
@@ -5334,7 +5334,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: fleisch
-    points: 4
+    points: 3
   - cardName: Kartoffel
     value: 5
     cardImage: {fileID: 21300000, guid: eeefd4a42fc396d4bbd1478eebf7dae1, type: 3}
@@ -5345,7 +5345,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: "gem\xFCse"
-    points: 5
+    points: 4
   - cardName: Mango
     value: 6
     cardImage: {fileID: 21300000, guid: bde0e6111f3626545a198239c6d58e6a, type: 3}
@@ -5400,7 +5400,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: dairy
-    points: 5
+    points: 3
   - cardName: Rindfleisch
     value: 11
     cardImage: {fileID: 21300000, guid: 577276be6e7247e4daa0ee3101683bba, type: 3}
@@ -5411,7 +5411,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: fleisch
-    points: 5
+    points: 3
   - cardName: Lachs
     value: 12
     cardImage: {fileID: 21300000, guid: 578e1f5b51f6b844183285838e301d39, type: 3}
@@ -5422,7 +5422,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: fisch
-    points: 5
+    points: 3
   - cardName: Mozerella
     value: 13
     cardImage: {fileID: 21300000, guid: 90ee564f9970d7846b19274dcca84f30, type: 3}
@@ -5433,7 +5433,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: dairy
-    points: 5
+    points: 3
   - cardName: Spinat
     value: 14
     cardImage: {fileID: 21300000, guid: 46c1a6c3094514340b55d01a374cde03, type: 3}
@@ -5477,7 +5477,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: getreide
-    points: 5
+    points: 4
   cardPrefab: {fileID: 5803009262139425360, guid: b3c73e67438c44f44b332ec9e1a63774, type: 3}
   handPanel: {fileID: 1097419314}
   deckImage: {fileID: 1831941489}

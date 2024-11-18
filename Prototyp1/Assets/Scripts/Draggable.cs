@@ -229,6 +229,10 @@ public void BuyNewDrawCharge()
 public void Play()
 {
     GameObject playedCardsPanel = GameObject.Find("Arena");
+    foreach (var card in selectedCards)
+{
+    Debug.Log($"Karte: {card.name}, Punkte: {card.points}");
+}
 
     // Löschen der Karten in der Arena
     foreach (Transform child in playedCardsPanel.transform)
