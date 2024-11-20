@@ -335,6 +335,7 @@
 "Assets/Scripts/AudioManager.cs"
 "Assets/Scripts/DeckManager.cs"
 "Assets/Scripts/Draggable.cs"
+"Assets/Scripts/DropZone.cs"
 "Assets/Scripts/EndScreenManager.cs"
 "Assets/Scripts/Hand.cs"
 "Assets/Scripts/MainMenu.cs"

@@ -11,6 +11,7 @@
 
 
 
+struct GridLayout_tAD661B1E1E57C16BE21C8C13432EA04FE1F0418B;
 struct Void_t4861ACF8F4594C3437BB48B6E56783494B843915;
 
 
@@ -39,6 +40,16 @@ struct IntPtr_t
 {
 	void* ___m_value;
 };
+struct Void_t4861ACF8F4594C3437BB48B6E56783494B843915 
+{
+	union
+	{
+		struct
+		{
+		};
+		uint8_t Void_t4861ACF8F4594C3437BB48B6E56783494B843915__padding[1];
+	};
+};
 struct Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C  : public RuntimeObject
 {
 	intptr_t ___m_CachedPtr;
@@ -60,6 +71,9 @@ struct Behaviour_t01970CFBBA658497AE30F311C447DB0440BAB7FA  : public Component_t
 struct GridLayout_tAD661B1E1E57C16BE21C8C13432EA04FE1F0418B  : public Behaviour_t01970CFBBA658497AE30F311C447DB0440BAB7FA
 {
 };
+struct Grid_t4C0ACF986206D18240E35155E01B5A97DAA651FE  : public GridLayout_tAD661B1E1E57C16BE21C8C13432EA04FE1F0418B
+{
+};
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
@@ -79,6 +93,20 @@ struct GridLayout_tAD661B1E1E57C16BE21C8C13432EA04FE1F0418B  : public Behaviour_
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GridLayout_DoNothing_mA280987BF98D257023D46C2C01902FC82EE6A00A (GridLayout_tAD661B1E1E57C16BE21C8C13432EA04FE1F0418B* __this, const RuntimeMethod* method) 
+{
+	{
+		return;
+	}
+}
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif

@@ -18,7 +18,7 @@ public class DeckManager : MonoBehaviour
 
     public void HandleDeckClick()
     {
-        if (clickCount >= 11)
+        if (clickCount >= 7)
         {
             Debug.Log("Du hast bereits 7 Karten gezogen. Weitere Ziehungen sind nicht mehr möglich.");
             return;

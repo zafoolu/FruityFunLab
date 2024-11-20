@@ -415,7 +415,6 @@ UnityEngine.Object::get_hideFlags
 UnityEngine.Object::FindObjectFromInstanceID
 UnityEngine.Object::Internal_CloneSingle
 UnityEngine.Object::Internal_CloneSingleWithParent
-UnityEngine.Object::FindObjectsOfType
 UnityEngine.ObjectGUIState::Internal_Create
 UnityEngine.ObjectGUIState::Internal_Destroy
 UnityEngine.Physics::get_invokeCollisionCallbacks

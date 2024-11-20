@@ -161,64 +161,74 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
     }
 
-    public void Play()
+public void Play()
+{
+    GameObject playedCardsPanel = GameObject.Find("Arena");
+
+    // Alle Karten im Arena-Bereich entfernen
+    foreach (Transform child in playedCardsPanel.transform)
     {
-        GameObject playedCardsPanel = GameObject.Find("Arena");
-
-        foreach (Transform child in playedCardsPanel.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        if (selectedCards.Count == 0) return;
-
-        int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
-        int roundPoints = 0;
-        float comboMultiplier = 1f;
-
-        foreach (Draggable card in selectedCards)
-        {
-            card.transform.SetParent(playedCardsPanel.transform);
-            card.selected = false;
-            card.GetComponent<CanvasGroup>().blocksRaycasts = false;
-            card.UpdateScale();
-
-            totalProtein += card.Protein;
-            totalCarbs += card.Carbs;
-            totalEtc += card.Etc;
-            totalCalories += card.Calories;
-            totalMinerals += card.Minerals;
-            totalVitamins += card.Vitamins;
-
-            roundPoints += card.points;
-
-            switch (card.foodType.ToLower())
-            {
-                case "obst": fruitCount++; break;
-                case "gemüse": vegetableCount++; break;
-                case "öl/fett": oilFatCount++; break;
-                case "fleisch": meatCount++; break;
-                case "getreide": grainCount++; break;
-                case "fisch": fishCount++; break;
-            }
-        }
-
-        if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
-        if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
-        if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
-        if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
-
-        roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
-        totalPoints += roundPoints;
-
-        if (proteinSlider != null) proteinSlider.value = totalProtein;
-        if (carbsSlider != null) carbsSlider.value = totalCarbs;
-        if (etcSlider != null) etcSlider.value = totalEtc;
-        if (caloriesSlider != null) caloriesSlider.value = totalCalories;
-        if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
-        if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
-
-        selectedCardCount = 0;
-        selectedCards.Clear();
+        Destroy(child.gameObject);
     }
+
+    // Falls keine Karten in der Arena sind, nichts tun
+    if (playedCardsPanel.transform.childCount == 0) return;
+
+    int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
+    int roundPoints = 0;
+    float comboMultiplier = 1f;
+
+    // Berechnung der Gesamtpunkte und Kombos für die Karten in der Arena
+    foreach (Transform child in playedCardsPanel.transform)
+    {
+        Draggable card = child.GetComponent<Draggable>();
+
+        // Wenn die Karte keine Draggable-Komponente hat, überspringen
+        if (card == null) continue;
+
+        // Punkte pro Karte berechnen (nicht mit Combo)
+        roundPoints += card.points;
+
+        // Ressourcen (Protein, Carbs, etc.) berechnen
+        totalProtein += card.Protein;
+        totalCarbs += card.Carbs;
+        totalEtc += card.Etc;
+        totalCalories += card.Calories;
+        totalMinerals += card.Minerals;
+        totalVitamins += card.Vitamins;
+
+        // Zählen der Kartentypen für Kombos
+        switch (card.foodType.ToLower())
+        {
+            case "obst": fruitCount++; break;
+            case "gemüse": vegetableCount++; break;
+            case "öl/fett": oilFatCount++; break;
+            case "fleisch": meatCount++; break;
+            case "getreide": grainCount++; break;
+            case "fisch": fishCount++; break;
+        }
+    }
+
+    // Kombos berechnen
+    if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+    if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
+    if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+    if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
+
+    // Kombos auf die Gesamtpunkte anwenden
+    roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
+    totalPoints += roundPoints;
+
+    // Update der Sliders
+    if (proteinSlider != null) proteinSlider.value = totalProtein;
+    if (carbsSlider != null) carbsSlider.value = totalCarbs;
+    if (etcSlider != null) etcSlider.value = totalEtc;
+    if (caloriesSlider != null) caloriesSlider.value = totalCalories;
+    if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
+    if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
+
+    // Rücksetzen der Auswahl und der Karten
+    selectedCardCount = 0;
+    selectedCards.Clear();
+}
 }

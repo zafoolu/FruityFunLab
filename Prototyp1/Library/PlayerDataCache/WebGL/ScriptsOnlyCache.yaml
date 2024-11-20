@@ -2,8 +2,10 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - AudioManager
+    - CardCollectionManager
     - DeckManager
     - Draggable
+    - DropZone
     - EndscreenManager
     - Hand
     - MainMenu
@@ -30,11 +32,13 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Slider
   serializedClasses:
     Assembly-CSharp:
@@ -69,19 +73,16 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventTrigger/Entry
     - UnityEngine.EventSystems.EventTrigger/TriggerEvent
     - UnityEngine.UI.AnimationTriggers
-    - UnityEngine.UI.Button/ButtonClickedEvent
     - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
+    - UnityEngine.UI.ScrollRect/ScrollRectEvent
     - UnityEngine.UI.Slider/SliderEvent
     - UnityEngine.UI.SpriteState
   methodsToPreserve:
   - assembly: Assembly-CSharp
     fullTypeName: MainMenu
-    methodName: PlayGame
-  - assembly: Assembly-CSharp
-    fullTypeName: MainMenu
-    methodName: QuitGame
+    methodName: LoadLibrary
   - assembly: Assembly-CSharp
     fullTypeName: MainMenu
     methodName: PlayGame
@@ -146,6 +147,63 @@ ScriptsOnlyBuild:
     fullTypeName: DeckManager
     methodName: HandleDeckClick
   sceneClasses:
+    Assets/Scenes/CardCollection.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1562}
+    - Class: 114
+      Script: {instanceID: 2608}
+    - Class: 114
+      Script: {instanceID: 2814}
+    - Class: 114
+      Script: {instanceID: 3860}
+    - Class: 114
+      Script: {instanceID: 4730}
+    - Class: 114
+      Script: {instanceID: 5602}
+    - Class: 114
+      Script: {instanceID: 6072}
+    - Class: 114
+      Script: {instanceID: 6576}
+    - Class: 114
+      Script: {instanceID: 7118}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
     Assets/Scenes/Level1.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -202,7 +260,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6072}
     - Class: 114
-      Script: {instanceID: 6782}
+      Script: {instanceID: 6784}
+    - Class: 114
+      Script: {instanceID: 24538}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -275,7 +335,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6072}
     - Class: 114
-      Script: {instanceID: 6782}
+      Script: {instanceID: 6784}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -348,7 +408,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6072}
     - Class: 114
-      Script: {instanceID: 6782}
+      Script: {instanceID: 6784}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -399,8 +459,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2814}
     - Class: 114
-      Script: {instanceID: 3104}
-    - Class: 114
       Script: {instanceID: 3980}
     - Class: 114
       Script: {instanceID: 4086}
@@ -413,11 +471,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5602}
     - Class: 114
-      Script: {instanceID: 5754}
-    - Class: 114
       Script: {instanceID: 6072}
     - Class: 114
-      Script: {instanceID: 6782}
+      Script: {instanceID: 6784}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1283,6 +1339,12 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionExitMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 580aa22aaba83a103516a357b3675a3f
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: CardCollectionManager
+  - hash:
+      serializedVersion: 2
       Hash: d2ecd94550edf1b56aff07b1f4e41c57
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1503,10 +1565,17 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: f9a6eda9991832c5bb4fb52505459c32
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: DropZone
   platform: 20
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Level1.unity
   - Assets/Scenes/Level2.unity
   - Assets/Scenes/Level3.unity
+  - Assets/Scenes/CardCollection.unity
   playerPath: C:/Users/solog/Desktop/Prototyp

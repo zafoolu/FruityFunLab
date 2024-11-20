@@ -36,6 +36,7 @@
           {
             "name": "AudioBehaviour",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -55,6 +56,7 @@
           {
             "name": "AudioListener",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -103,6 +105,7 @@
           {
             "name": "Camera",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -126,6 +129,7 @@
           {
             "name": "Cubemap",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -149,6 +153,7 @@
           {
             "name": "EditorExtension",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -166,6 +171,7 @@
           {
             "name": "GameObject",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -195,6 +201,7 @@
           {
             "name": "LevelGameManager",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -206,6 +213,7 @@
           {
             "name": "Light",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -229,6 +237,7 @@
           {
             "name": "LightmapSettings",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -246,6 +255,7 @@
           {
             "name": "Material",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -275,6 +285,7 @@
           {
             "name": "MonoBehaviour",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -292,6 +303,7 @@
           {
             "name": "MonoScript",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -303,6 +315,7 @@
           {
             "name": "NamedObject",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -338,6 +351,7 @@
           {
             "name": "RectTransform",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -355,6 +369,7 @@
           {
             "name": "RenderSettings",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -390,6 +405,7 @@
           {
             "name": "Shader",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -413,6 +429,7 @@
           {
             "name": "Sprite",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -494,6 +511,12 @@
             "icon": "package/com.unity.modules.audio"
           },
           {
+            "name": "Required by Grid Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.grid"
+          },
+          {
             "name": "Required by IMGUI Module",
             "scenes": [],
             "dependencyType": 2,
@@ -564,6 +587,25 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.webgl"
+          }
+        ]
+      },
+      {
+        "name": "Grid",
+        "dependencies": [
+          {
+            "name": "Grid",
+            "scenes": [
+              "Assets/Scenes/CardCollection.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "GridLayout",
+            "scenes": [],
+            "dependencyType": 1,
+            "icon": null
           }
         ]
       },
@@ -693,6 +735,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.core"
+          },
+          {
+            "name": "Required by Grid Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.grid"
           },
           {
             "name": "Required by IMGUI Module",
@@ -860,6 +908,7 @@
           {
             "name": "Canvas",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
@@ -871,6 +920,7 @@
           {
             "name": "CanvasGroup",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity"
@@ -881,6 +931,7 @@
           {
             "name": "CanvasRenderer",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
               "Assets/Scenes/Level3.unity",
