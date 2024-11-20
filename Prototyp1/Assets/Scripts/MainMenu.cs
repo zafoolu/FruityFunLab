@@ -13,4 +13,10 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();     //schlie�t Spiel
     }
+
+    public void LoadLibrary()
+    {
+        SceneManager.LoadScene("CardCollection");
+    }
+
 }

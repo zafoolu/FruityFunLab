@@ -339,6 +339,7 @@
 "Assets/Scripts/Hand.cs"
 "Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/ScoreManager.cs"
+"Assets/Scripts/ShowCardCollection.cs"
 "Assets/Scripts/Sound.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
