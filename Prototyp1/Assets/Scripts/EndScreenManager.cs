@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class EndscreenManager : MonoBehaviour
 {
+    // Dein Endscreen Panel
     public GameObject endscreenPanel;
+
+    // Textfelder für die Gesamtwerte
     public TextMeshProUGUI totalProteinText;
     public TextMeshProUGUI totalCarbsText;
     public TextMeshProUGUI totalEtcText;
@@ -14,13 +17,16 @@ public class EndscreenManager : MonoBehaviour
     public TextMeshProUGUI totalPointsText;
     public TextMeshProUGUI moneyText;
 
+    // Neue Variablen für maximale Punktzahlen auf jedem Level
+    public int maxPointsLevel1 = 60;
+    public int maxPointsLevel2 = 70;
+    public int maxPointsLevel3 = 80;
+
     private bool isGameOver = false;
 
-
-
-        void Awake()
+    void Awake()
     {
-         endscreenPanel.SetActive(false);
+        // Alle Gesamtwerte zurücksetzen
         Draggable.totalProtein = 0;
         Draggable.totalCarbs = 0;
         Draggable.totalEtc = 0;
@@ -29,9 +35,11 @@ public class EndscreenManager : MonoBehaviour
         Draggable.totalMinerals = 0;
         Draggable.totalPoints = 0;
 
+        // Endscreen Panel ausblenden
+        endscreenPanel.SetActive(false);
+
         Debug.Log("Alle total-Werte wurden zurückgesetzt.");
     }
-
 
     void OnEnable()
     {
@@ -47,17 +55,39 @@ public class EndscreenManager : MonoBehaviour
     {
         moneyText.text = $"{Draggable.money}";
 
-        if (!isGameOver && Draggable.totalPoints >= 60)
+        // Setze die maximalen Punktzahlen für das aktuelle Level
+        int levelTargetPoints = GetLevelTargetPoints(SceneManager.GetActiveScene().name);
+
+        // Wenn die Gesamtpunkte erreicht wurden, zeige den Endscreen an
+        if (!isGameOver && Draggable.totalPoints >= levelTargetPoints)
         {
             ShowEndscreen();
         }
     }
 
+    // Methode zur Rückgabe des Zielwerts für Punkte pro Level
+    int GetLevelTargetPoints(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Level1":
+                return maxPointsLevel1; // Zielpunkte für Level 1
+            case "Level2":
+                return maxPointsLevel2; // Zielpunkte für Level 2
+            case "Level3":
+                return maxPointsLevel3; // Zielpunkte für Level 3
+            default:
+                return 60; // Standardwert
+        }
+    }
+
+    // Endscreen anzeigen
     public void ShowEndscreen()
     {
-        Draggable.money += 6;
+        Draggable.money += 6; // Bonus bei Levelabschluss
         isGameOver = true;
 
+        // Textfelder für die Gesamtwerte und Punkte anzeigen
         UpdateTextWithColor(totalProteinText, Draggable.totalProtein / 10f, 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
@@ -72,11 +102,13 @@ public class EndscreenManager : MonoBehaviour
         totalMineralsText.text = $"Total Minerals: {Draggable.totalMinerals}";
         totalPointsText.text = $"Total Points: {Draggable.totalPoints}";
 
+        // Endscreen Panel aktivieren
         endscreenPanel.SetActive(true);
 
         Debug.Log("Endscreen wurde angezeigt.");
     }
 
+    // Hilfsmethode, um den Text mit Farbe basierend auf dem Wert zu aktualisieren
     private void UpdateTextWithColor(TextMeshProUGUI textField, float value, int[] thresholds, Color[] colors)
     {
         textField.text = $"{textField.text.Split(':')[0]}: {value:F2}";
@@ -93,6 +125,7 @@ public class EndscreenManager : MonoBehaviour
         textField.color = colors[colors.Length - 1];
     }
 
+    // Spezielle Methode, um den Text mit Farbe für die Kalorien zu aktualisieren
     private void UpdateTextWithColorForCalories(TextMeshProUGUI textField, float value, int[] thresholds, Color[] colors)
     {
         textField.text = $"{textField.text.Split(':')[0]}: {value}";
@@ -109,6 +142,7 @@ public class EndscreenManager : MonoBehaviour
         textField.color = colors[colors.Length - 1];
     }
 
+    // Methode zum Laden der nächsten Szene
     public void LoadNextLevel()
     {
         if (endscreenPanel != null)
@@ -133,6 +167,7 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
+    // Methode, die nach dem Laden einer neuen Szene aufgerufen wird
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (endscreenPanel != null)

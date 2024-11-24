@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;  // TextMeshPro verwenden
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -56,11 +57,30 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public static int discardCharge = 1;
     public static int newDrawCharge = 1;
 
+    // TextMeshPro-Referenzen für Anzeige der verbleibenden Charges
+    public TextMeshProUGUI discardChargeText;
+    public TextMeshProUGUI newDrawChargeText;
+
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         parentCanvas = GetComponentInParent<Canvas>();
         originalScale = this.transform.localScale;
+    }
+
+    // Die Update-Methode wird jeden Frame aufgerufen
+    void Update()
+    {
+        // Aktualisiere die Textfelder mit den aktuellen Werten der Charges (nur die Zahl, ohne Text davor)
+        if (discardChargeText != null)
+        {
+            discardChargeText.text = discardCharge.ToString();  // Nur die Zahl anzeigen
+        }
+
+        if (newDrawChargeText != null)
+        {
+            newDrawChargeText.text = newDrawCharge.ToString();  // Nur die Zahl anzeigen
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -171,10 +191,14 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (playedCardsPanel.transform.childCount == 0) return;
 
+        int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
         int roundPoints = 0;
+        float comboMultiplier = 1f;
+
         foreach (Transform child in playedCardsPanel.transform)
         {
             Draggable card = child.GetComponent<Draggable>();
+
             if (card == null) continue;
 
             roundPoints += card.points;
@@ -185,10 +209,28 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             totalCalories += card.Calories;
             totalMinerals += card.Minerals;
             totalVitamins += card.Vitamins;
+
+            switch (card.foodType.ToLower())
+            {
+                case "obst": fruitCount++; break;
+                case "gemüse": vegetableCount++; break;
+                case "öl/fett": oilFatCount++; break;
+                case "fleisch": meatCount++; break;
+                case "getreide": grainCount++; break;
+                case "fisch": fishCount++; break;
+            }
         }
 
+        // Komboslogik
+        if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+        if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
+        if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+        if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
+
+        roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
         totalPoints += roundPoints;
 
+        // Update der Slider-Werte
         if (proteinSlider != null) proteinSlider.value = totalProtein;
         if (carbsSlider != null) carbsSlider.value = totalCarbs;
         if (etcSlider != null) etcSlider.value = totalEtc;
@@ -211,8 +253,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
             deckManager.DrawCard(); // Angepasster Aufruf
 
-            newDrawCharge--;
-
+            newDrawCharge--;  // New Draw Charge verringern
             Debug.Log("Neue Karte gezogen. Verbleibende Charges: " + newDrawCharge);
         }
         else
@@ -236,9 +277,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
                 deckManager.DrawCard(); // Angepasster Aufruf
 
-                discardCharge--;
-
-                Debug.Log("Eine Karte wurde discarded. Verbleibende Discard-Charges: " + discardCharge);
+                discardCharge--;  // Discard Charge verringern
+                Debug.Log("Karte verworfen. Verbleibende Charges: " + discardCharge);
             }
             else if (cardCount > 1)
             {
@@ -251,7 +291,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         else
         {
-            Debug.Log("Keine Discard-Charges mehr verfügbar.");
+            Debug.Log("Keine Discard Charges verfügbar.");
         }
     }
 }
