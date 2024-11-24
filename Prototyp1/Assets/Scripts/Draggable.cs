@@ -274,24 +274,55 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             {
                 Draggable cardToDiscard = playedCardsPanel.transform.GetChild(0).GetComponent<Draggable>();
                 Destroy(cardToDiscard.gameObject);
-
-                deckManager.DrawCard(); // Angepasster Aufruf
-
                 discardCharge--;  // Discard Charge verringern
-                Debug.Log("Karte verworfen. Verbleibende Charges: " + discardCharge);
-            }
-            else if (cardCount > 1)
-            {
-                Debug.Log("Es darf nur eine Karte in der Arena sein, um sie zu discarden.");
-            }
-            else
-            {
-                Debug.Log("Keine Karte in der Arena, die discarded werden kann.");
+                Debug.Log("Karte verworfen. Verbleibende Discard Charges: " + discardCharge);
             }
         }
         else
         {
             Debug.Log("Keine Discard Charges verfügbar.");
+        }
+    }
+
+    // Kaufen von Discard Charges
+    public void BuyDiscard()
+    {
+        if (money >= 2)
+        {
+            money -= 2;
+            discardCharge++;
+            Debug.Log("Discard Charge gekauft! Verbleibendes Geld: " + money);
+        }
+        else
+        {
+            Debug.Log("Nicht genug Geld, um eine Discard Charge zu kaufen.");
+        }
+
+        // Update der Textanzeige für Discard Charges
+        if (discardChargeText != null)
+        {
+            discardChargeText.text = discardCharge.ToString();
+        }
+    }
+
+    // Kaufen von New Draw Charges
+    public void BuyNewDraw()
+    {
+        if (money >= 3)
+        {
+            money -= 3;
+            newDrawCharge++;
+            Debug.Log("New Draw Charge gekauft! Verbleibendes Geld: " + money);
+        }
+        else
+        {
+            Debug.Log("Nicht genug Geld, um eine New Draw Charge zu kaufen.");
+        }
+
+        // Update der Textanzeige für New Draw Charges
+        if (newDrawChargeText != null)
+        {
+            newDrawChargeText.text = newDrawCharge.ToString();
         }
     }
 }

@@ -813,8 +813,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 156.5483, y: -106.81}
-  m_SizeDelta: {x: -1484.875, y: -996}
+  m_AnchoredPosition: {x: 179, y: -64.435}
+  m_SizeDelta: {x: -1668.8491, y: -844.1484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425802582
 MonoBehaviour:
@@ -835,7 +835,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 672013947}
           m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
-          m_MethodName: BuyDiscardCharge
+          m_MethodName: BuyDiscard
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3838,8 +3838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -191, y: -106.82}
-  m_SizeDelta: {x: -1484.875, y: -996}
+  m_AnchoredPosition: {x: -239, y: -86.378}
+  m_SizeDelta: {x: -1627.9658, y: -844.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453969683
 MonoBehaviour:
@@ -3860,7 +3860,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 672013947}
           m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
-          m_MethodName: BuyNewDrawCharge
+          m_MethodName: BuyNewDraw
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5158,8 +5158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 535.77, y: -27.000244}
-  m_SizeDelta: {x: -1484.875, y: -996}
+  m_AnchoredPosition: {x: 629.12244, y: -35.76062}
+  m_SizeDelta: {x: -1730.1736, y: -855.8293}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649106485
 MonoBehaviour:
