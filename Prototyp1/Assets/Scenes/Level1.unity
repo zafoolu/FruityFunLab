@@ -1322,9 +1322,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfFood: 0
-  selected: 0
   isDragging: 0
   parenToReturnTo: {fileID: 0}
+  zoomedScale: {x: 0, y: 0, z: 0}
+  zoomedPosition: {x: 0, y: 0}
   Protein: 0
   Carbs: 0
   Etc: 0
@@ -2347,9 +2348,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfFood: 0
-  selected: 0
   isDragging: 0
   parenToReturnTo: {fileID: 0}
+  zoomedScale: {x: 0, y: 0, z: 0}
+  zoomedPosition: {x: 0, y: 0}
   Protein: 0
   Carbs: 0
   Etc: 0
@@ -3776,13 +3778,13 @@ RectTransform:
   m_Children:
   - {fileID: 5850643}
   - {fileID: 1251662670}
+  - {fileID: 92231428}
+  - {fileID: 1461606849}
+  - {fileID: 1010837268}
+  - {fileID: 1122570557}
   - {fileID: 1097419314}
   - {fileID: 672297104}
   - {fileID: 1831941492}
-  - {fileID: 1122570557}
-  - {fileID: 1461606849}
-  - {fileID: 1010837268}
-  - {fileID: 92231428}
   - {fileID: 561603372}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3991,7 +3993,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 672013947}
           m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
-          m_MethodName: DiscardCards
+          m_MethodName: Discard
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1831941495}

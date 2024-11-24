@@ -1,23 +1,27 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
+public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public enum Food { Good, Bad }
     public Food typeOfFood;
 
-    public bool selected;
     public bool isDragging;
-
     public Transform parenToReturnTo = null;
-    private Vector3 originalScale;
-    private Vector3 selectedScale;
 
-    private static int selectedCardCount = 0;
-    private const int maxSelectedCards = 3;
-    private static List<Draggable> selectedCards = new List<Draggable>();
+    private Vector3 originalScale;
+    private Vector3 originalPosition;
+    private bool isZoomed = false;
+
+    private RectTransform rectTransform;
+    private Canvas parentCanvas;
+    private Vector2 dragStartPos;
+    private const float dragThreshold = 10f;
+
+    [Header("Zoom Settings")]
+    public Vector3 zoomedScale = new Vector3(2.5f, 2.5f, 2.5f); // Skalierung beim Zoom
+    public Vector2 zoomedPosition = Vector2.zero; // Zielposition beim Zoom (Canvas-Koordinaten)
 
     public int Protein;
     public int Carbs;
@@ -43,192 +47,211 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Slider vitaminsSlider;
     public Slider mineralsSlider;
 
+    public static int money = 0;
+
+    // Neue statische Referenz für die aktuell gezoomte Karte
+    private static Draggable currentlyZoomedCard = null;
+
+    // New Draw und Discard Charges
     public static int discardCharge = 1;
     public static int newDrawCharge = 1;
-    public static int money = 0;
 
     void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+        parentCanvas = GetComponentInParent<Canvas>();
         originalScale = this.transform.localScale;
-        selectedScale = originalScale * 1.2f;
-
-        if (proteinSlider != null) proteinSlider.value = totalProtein;
-        if (carbsSlider != null) carbsSlider.value = totalCarbs;
-        if (etcSlider != null) etcSlider.value = totalEtc;
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        parenToReturnTo = this.transform.parent;
-        this.transform.SetParent(this.transform.parent.parent);
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        this.transform.SetParent(parenToReturnTo);
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        this.transform.position = eventData.position;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!selected && selectedCardCount >= maxSelectedCards)
+        dragStartPos = eventData.position;
+        isDragging = false;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (!isDragging) // Nur wenn kein Dragging aktiv ist
         {
+            if (!isZoomed) // Kein Zoom im Discard-Modus
+            {
+                ZoomIn();
+            }
+            else
+            {
+                ZoomOut();
+            }
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        float distance = Vector2.Distance(dragStartPos, eventData.position);
+        if (distance > dragThreshold)
+        {
+            isDragging = true;
+
+            parenToReturnTo = this.transform.parent;
+            this.transform.SetParent(this.transform.parent.parent);
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!isDragging) return;
+        this.transform.position = eventData.position;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (!isDragging) return;
+
+        this.transform.SetParent(parenToReturnTo);
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    private void ZoomIn()
+    {
+        if (currentlyZoomedCard != null && currentlyZoomedCard != this)
+        {
+            currentlyZoomedCard.ZoomOut();
+        }
+
+        isZoomed = true;
+        currentlyZoomedCard = this; // Diese Karte als aktuell gezoomt setzen
+
+        originalPosition = rectTransform.anchoredPosition;
+
+        if (parentCanvas == null)
+        {
+            Debug.LogError("Parent Canvas ist null. Zoom kann nicht ausgeführt werden.");
             return;
         }
 
-        selected = !selected;
-
-        if (selected)
+        Camera canvasCamera = parentCanvas.worldCamera;
+        if (canvasCamera == null)
         {
-            selectedCardCount++;
-            selectedCards.Add(this);
-        }
-        else
-        {
-            selectedCardCount--;
-            selectedCards.Remove(this);
+            canvasCamera = Camera.main;
         }
 
-        UpdateScale();
-    }
-
-    private void UpdateScale()
-    {
-        this.transform.localScale = selected ? selectedScale : originalScale;
-    }
-
-    public void DiscardCards(DeckManager deckManager)
-    {
-        if (discardCharge <= 0 || selectedCards.Count != 1) return;
-
-        Draggable cardToDiscard = selectedCards[0];
-        Destroy(cardToDiscard.gameObject);
-
-        selectedCards.Clear();
-        selectedCardCount = 0;
-
-        deckManager.DrawCard();
-        discardCharge--;
-    }
-
-    public void BuyDiscardCharge()
-    {
-        int cost = 2;
-
-        if (money >= cost)
+        if (canvasCamera == null)
         {
-            money -= cost;
-            discardCharge++;
+            Debug.LogError("Keine Kamera gefunden! Zoom kann nicht durchgeführt werden.");
+            return;
         }
+
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Vector2 canvasCenter = parentCanvas.GetComponent<RectTransform>().InverseTransformPoint(screenCenter);
+
+        rectTransform.anchoredPosition = canvasCenter;
+        this.transform.localScale = zoomedScale;
     }
 
+    private void ZoomOut()
+    {
+        isZoomed = false;
+        if (currentlyZoomedCard == this)
+        {
+            currentlyZoomedCard = null;
+        }
+
+        rectTransform.anchoredPosition = originalPosition;
+        this.transform.localScale = originalScale;
+    }
+
+    public void Play()
+    {
+        GameObject playedCardsPanel = GameObject.Find("Arena");
+
+        foreach (Transform child in playedCardsPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        if (playedCardsPanel.transform.childCount == 0) return;
+
+        int roundPoints = 0;
+        foreach (Transform child in playedCardsPanel.transform)
+        {
+            Draggable card = child.GetComponent<Draggable>();
+            if (card == null) continue;
+
+            roundPoints += card.points;
+
+            totalProtein += card.Protein;
+            totalCarbs += card.Carbs;
+            totalEtc += card.Etc;
+            totalCalories += card.Calories;
+            totalMinerals += card.Minerals;
+            totalVitamins += card.Vitamins;
+        }
+
+        totalPoints += roundPoints;
+
+        if (proteinSlider != null) proteinSlider.value = totalProtein;
+        if (carbsSlider != null) carbsSlider.value = totalCarbs;
+        if (etcSlider != null) etcSlider.value = totalEtc;
+        if (caloriesSlider != null) caloriesSlider.value = totalCalories;
+        if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
+        if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
+    }
+
+    // Methode für New Draw
     public void NewDraw(DeckManager deckManager)
     {
-        if (newDrawCharge <= 0 || selectedCards.Count > 2) return;
-
-        int cardsToRemove = deckManager.handPanel.childCount - selectedCards.Count;
-
-        foreach (Transform child in deckManager.handPanel)
+        if (newDrawCharge > 0)
         {
-            if (!selectedCards.Contains(child.GetComponent<Draggable>()))
+            GameObject playedCardsPanel = GameObject.Find("Arena");
+
+            foreach (Transform child in playedCardsPanel.transform)
             {
                 Destroy(child.gameObject);
             }
-        }
 
-        for (int i = 0; i < cardsToRemove; i++)
+            deckManager.DrawCard(); // Angepasster Aufruf
+
+            newDrawCharge--;
+
+            Debug.Log("Neue Karte gezogen. Verbleibende Charges: " + newDrawCharge);
+        }
+        else
         {
-            deckManager.DrawCard();
+            Debug.Log("Keine New Draw Charges verfügbar.");
         }
-
-        newDrawCharge--;
     }
 
-    public void BuyNewDrawCharge()
+    // Methode für Discard
+    public void Discard(DeckManager deckManager)
     {
-        int cost = 3;
+        GameObject playedCardsPanel = GameObject.Find("Arena");
+        int cardCount = playedCardsPanel.transform.childCount;
 
-        if (money >= cost)
+        if (discardCharge > 0)
         {
-            money -= cost;
-            newDrawCharge++;
+            if (cardCount == 1)
+            {
+                Draggable cardToDiscard = playedCardsPanel.transform.GetChild(0).GetComponent<Draggable>();
+                Destroy(cardToDiscard.gameObject);
+
+                deckManager.DrawCard(); // Angepasster Aufruf
+
+                discardCharge--;
+
+                Debug.Log("Eine Karte wurde discarded. Verbleibende Discard-Charges: " + discardCharge);
+            }
+            else if (cardCount > 1)
+            {
+                Debug.Log("Es darf nur eine Karte in der Arena sein, um sie zu discarden.");
+            }
+            else
+            {
+                Debug.Log("Keine Karte in der Arena, die discarded werden kann.");
+            }
         }
-    }
-
-public void Play()
-{
-    GameObject playedCardsPanel = GameObject.Find("Arena");
-
-    // Alle Karten im Arena-Bereich entfernen
-    foreach (Transform child in playedCardsPanel.transform)
-    {
-        Destroy(child.gameObject);
-    }
-
-    // Falls keine Karten in der Arena sind, nichts tun
-    if (playedCardsPanel.transform.childCount == 0) return;
-
-    int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
-    int roundPoints = 0;
-    float comboMultiplier = 1f;
-
-    // Berechnung der Gesamtpunkte und Kombos für die Karten in der Arena
-    foreach (Transform child in playedCardsPanel.transform)
-    {
-        Draggable card = child.GetComponent<Draggable>();
-
-        // Wenn die Karte keine Draggable-Komponente hat, überspringen
-        if (card == null) continue;
-
-        // Punkte pro Karte berechnen (nicht mit Combo)
-        roundPoints += card.points;
-
-        // Ressourcen (Protein, Carbs, etc.) berechnen
-        totalProtein += card.Protein;
-        totalCarbs += card.Carbs;
-        totalEtc += card.Etc;
-        totalCalories += card.Calories;
-        totalMinerals += card.Minerals;
-        totalVitamins += card.Vitamins;
-
-        // Zählen der Kartentypen für Kombos
-        switch (card.foodType.ToLower())
+        else
         {
-            case "obst": fruitCount++; break;
-            case "gemüse": vegetableCount++; break;
-            case "öl/fett": oilFatCount++; break;
-            case "fleisch": meatCount++; break;
-            case "getreide": grainCount++; break;
-            case "fisch": fishCount++; break;
+            Debug.Log("Keine Discard-Charges mehr verfügbar.");
         }
     }
-
-    // Kombos berechnen
-    if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
-    if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
-    if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
-    if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
-
-    // Kombos auf die Gesamtpunkte anwenden
-    roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
-    totalPoints += roundPoints;
-
-    // Update der Sliders
-    if (proteinSlider != null) proteinSlider.value = totalProtein;
-    if (carbsSlider != null) carbsSlider.value = totalCarbs;
-    if (etcSlider != null) etcSlider.value = totalEtc;
-    if (caloriesSlider != null) caloriesSlider.value = totalCalories;
-    if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
-    if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
-
-    // Rücksetzen der Auswahl und der Karten
-    selectedCardCount = 0;
-    selectedCards.Clear();
-}
 }
