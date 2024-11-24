@@ -240,27 +240,61 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     }
 
     // Methode für New Draw
-    public void NewDraw(DeckManager deckManager)
+public void NewDraw(DeckManager deckManager)
+{
+    if (newDrawCharge > 0)
     {
-        if (newDrawCharge > 0)
-        {
-            GameObject playedCardsPanel = GameObject.Find("Arena");
+        // Alle Karten im Handbereich entfernen (nicht das "Arena"-Panel!)
+        GameObject handPanel = GameObject.Find("Hand"); // Der Name des Panels, das die Handkarten enthält (anpassen!)
 
-            foreach (Transform child in playedCardsPanel.transform)
+        if (handPanel == null)
+        {
+            Debug.LogError("Hand Panel konnte nicht gefunden werden.");
+            return;
+        }
+
+        int cardCount = handPanel.transform.childCount; // Anzahl der Karten auf der Hand
+        Debug.Log("Anzahl der Karten auf der Hand: " + cardCount);
+
+        // Alle Karten im Hand-Panel entfernen
+        foreach (Transform child in handPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Neue Karten ziehen: Die gleiche Anzahl an Karten, die entfernt wurden
+        for (int i = 0; i < cardCount; i++)
+        {
+            if (deckManager != null)
             {
-                Destroy(child.gameObject);
+                deckManager.DrawCard(); // Angepasster Aufruf zum Nachziehen einer Karte
+                Debug.Log("Neue Karte wurde gezogen.");
             }
-
-            deckManager.DrawCard(); // Angepasster Aufruf
-
-            newDrawCharge--;  // New Draw Charge verringern
-            Debug.Log("Neue Karte gezogen. Verbleibende Charges: " + newDrawCharge);
+            else
+            {
+                Debug.LogError("DeckManager ist null. Keine Karten können gezogen werden.");
+            }
         }
-        else
-        {
-            Debug.Log("Keine New Draw Charges verfügbar.");
-        }
+
+        // Nach dem Ziehen der Karten wird die Charge verringert
+        newDrawCharge--;
+        Debug.Log("Karten abgeworfen und " + cardCount + " neue Karten gezogen. Verbleibende New Draw Charges: " + newDrawCharge);
     }
+    else
+    {
+        Debug.Log("Keine New Draw Charges verfügbar.");
+    }
+
+    // Textanzeige für die verbleibenden New Draw Charges aktualisieren
+    if (newDrawChargeText != null)
+    {
+        newDrawChargeText.text = newDrawCharge.ToString();
+    }
+    else
+    {
+        Debug.LogError("TextMeshPro-Referenz für New Draw Charges wurde nicht gefunden.");
+    }
+}
 
     // Methode für Discard
     public void Discard(DeckManager deckManager)
