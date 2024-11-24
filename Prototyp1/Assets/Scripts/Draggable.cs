@@ -297,26 +297,37 @@ public void NewDraw(DeckManager deckManager)
 }
 
     // Methode für Discard
-    public void Discard(DeckManager deckManager)
+public void Discard(DeckManager deckManager)
+{
+    if (currentlyZoomedCard != null)  // Überprüfen, ob eine Karte gezoomt ist
     {
-        GameObject playedCardsPanel = GameObject.Find("Arena");
-        int cardCount = playedCardsPanel.transform.childCount;
+        // Entfernen der gezoomten Karte
+        Destroy(currentlyZoomedCard.gameObject);
 
-        if (discardCharge > 0)
+        // Neue Karte nachziehen
+        deckManager.DrawCard();  // Ziehe eine neue Karte
+
+        // Discard Charge verringern
+        discardCharge--;
+
+        // Debug-Nachricht
+        Debug.Log("Gezoomte Karte verworfen. Verbleibende Discard Charges: " + discardCharge);
+
+        // Kartenzoom zurücksetzen
+        currentlyZoomedCard.ZoomOut();
+
+        // Update der Textanzeige für Discard Charges
+        if (discardChargeText != null)
         {
-            if (cardCount == 1)
-            {
-                Draggable cardToDiscard = playedCardsPanel.transform.GetChild(0).GetComponent<Draggable>();
-                Destroy(cardToDiscard.gameObject);
-                discardCharge--;  // Discard Charge verringern
-                Debug.Log("Karte verworfen. Verbleibende Discard Charges: " + discardCharge);
-            }
-        }
-        else
-        {
-            Debug.Log("Keine Discard Charges verfügbar.");
+            discardChargeText.text = discardCharge.ToString();
         }
     }
+    else
+    {
+        // Kein Zoom, daher keine Karte zum Discarden
+        Debug.Log("Keine gezoomte Karte zum Verwerfen.");
+    }
+}
 
     // Kaufen von Discard Charges
     public void BuyDiscard()
