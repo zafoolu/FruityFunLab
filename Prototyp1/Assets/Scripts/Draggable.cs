@@ -1,7 +1,8 @@
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;  // TextMeshPro verwenden
+using TMPro;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -14,16 +15,15 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector3 originalScale;
     private Vector3 originalPosition;
     private bool isZoomed = false;
-
+public EndscreenManager endscreenManager;
     private RectTransform rectTransform;
     private Canvas parentCanvas;
     private Vector2 dragStartPos;
     private const float dragThreshold = 10f;
 
-    [Header("Zoom Settings")]
-    public Vector3 zoomedScale = new Vector3(2.5f, 2.5f, 2.5f); // Skalierung beim Zoom
-    public Vector2 zoomedPosition = Vector2.zero; // Zielposition beim Zoom (Canvas-Koordinaten)
-
+    public Vector3 zoomedScale = new Vector3(2.5f, 2.5f, 2.5f);
+    public Vector2 zoomedPosition = Vector2.zero;
+public static int totalPlayedCards = 0;
     public int Protein;
     public int Carbs;
     public int Etc;
@@ -50,14 +50,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public static int money = 0;
 
-    // Neue statische Referenz für die aktuell gezoomte Karte
     private static Draggable currentlyZoomedCard = null;
 
-    // New Draw und Discard Charges
     public static int discardCharge = 1;
     public static int newDrawCharge = 1;
 
-    // TextMeshPro-Referenzen für Anzeige der verbleibenden Charges
     public TextMeshProUGUI discardChargeText;
     public TextMeshProUGUI newDrawChargeText;
 
@@ -68,18 +65,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         originalScale = this.transform.localScale;
     }
 
-    // Die Update-Methode wird jeden Frame aufgerufen
     void Update()
     {
-        // Aktualisiere die Textfelder mit den aktuellen Werten der Charges (nur die Zahl, ohne Text davor)
         if (discardChargeText != null)
         {
-            discardChargeText.text = discardCharge.ToString();  // Nur die Zahl anzeigen
+            discardChargeText.text = discardCharge.ToString();
         }
 
         if (newDrawChargeText != null)
         {
-            newDrawChargeText.text = newDrawCharge.ToString();  // Nur die Zahl anzeigen
+            newDrawChargeText.text = newDrawCharge.ToString();
         }
     }
 
@@ -91,9 +86,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!isDragging) // Nur wenn kein Dragging aktiv ist
+        if (!isDragging)
         {
-            if (!isZoomed) // Kein Zoom im Discard-Modus
+            if (!isZoomed)
             {
                 ZoomIn();
             }
@@ -139,13 +134,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
 
         isZoomed = true;
-        currentlyZoomedCard = this; // Diese Karte als aktuell gezoomt setzen
+        currentlyZoomedCard = this;
 
         originalPosition = rectTransform.anchoredPosition;
 
         if (parentCanvas == null)
         {
-            Debug.LogError("Parent Canvas ist null. Zoom kann nicht ausgeführt werden.");
             return;
         }
 
@@ -157,7 +151,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (canvasCamera == null)
         {
-            Debug.LogError("Keine Kamera gefunden! Zoom kann nicht durchgeführt werden.");
             return;
         }
 
@@ -180,8 +173,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         this.transform.localScale = originalScale;
     }
 
-    public void Play()
+   public void Play()
     {
+        // Bereinige das Spielfeld
         GameObject playedCardsPanel = GameObject.Find("Arena");
 
         foreach (Transform child in playedCardsPanel.transform)
@@ -221,7 +215,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             }
         }
 
-        // Komboslogik
         if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
         if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
         if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
@@ -230,144 +223,92 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
         totalPoints += roundPoints;
 
-        // Update der Slider-Werte
-        if (proteinSlider != null) proteinSlider.value = totalProtein;
-        if (carbsSlider != null) carbsSlider.value = totalCarbs;
-        if (etcSlider != null) etcSlider.value = totalEtc;
-        if (caloriesSlider != null) caloriesSlider.value = totalCalories;
-        if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
-        if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
+        // Am Ende des Plays: Überprüfe, ob das Spiel zu Ende ist
+        if (endscreenManager != null)
+        {
+            endscreenManager.CheckGameOver();
+        }
     }
 
-    // Methode für New Draw
-public void NewDraw(DeckManager deckManager)
-{
-    if (newDrawCharge > 0)
+    public void NewDraw(DeckManager deckManager)
     {
-        // Alle Karten im Handbereich entfernen (nicht das "Arena"-Panel!)
-        GameObject handPanel = GameObject.Find("Hand"); // Der Name des Panels, das die Handkarten enthält (anpassen!)
-
-        if (handPanel == null)
+        if (newDrawCharge > 0)
         {
-            Debug.LogError("Hand Panel konnte nicht gefunden werden.");
-            return;
-        }
+            GameObject handPanel = GameObject.Find("Hand");
 
-        int cardCount = handPanel.transform.childCount; // Anzahl der Karten auf der Hand
-        Debug.Log("Anzahl der Karten auf der Hand: " + cardCount);
-
-        // Alle Karten im Hand-Panel entfernen
-        foreach (Transform child in handPanel.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        // Neue Karten ziehen: Die gleiche Anzahl an Karten, die entfernt wurden
-        for (int i = 0; i < cardCount; i++)
-        {
-            if (deckManager != null)
+            if (handPanel == null)
             {
-                deckManager.DrawCard(); // Angepasster Aufruf zum Nachziehen einer Karte
-                Debug.Log("Neue Karte wurde gezogen.");
+                return;
             }
-            else
+
+            int cardCount = handPanel.transform.childCount;
+
+            foreach (Transform child in handPanel.transform)
             {
-                Debug.LogError("DeckManager ist null. Keine Karten können gezogen werden.");
+                Destroy(child.gameObject);
+            }
+
+            for (int i = 0; i < cardCount; i++)
+            {
+                if (deckManager != null)
+                {
+                    deckManager.DrawCard();
+                }
+            }
+
+            newDrawCharge--;
+
+            if (newDrawChargeText != null)
+            {
+                newDrawChargeText.text = newDrawCharge.ToString();
             }
         }
-
-        // Nach dem Ziehen der Karten wird die Charge verringert
-        newDrawCharge--;
-        Debug.Log("Karten abgeworfen und " + cardCount + " neue Karten gezogen. Verbleibende New Draw Charges: " + newDrawCharge);
-    }
-    else
-    {
-        Debug.Log("Keine New Draw Charges verfügbar.");
     }
 
-    // Textanzeige für die verbleibenden New Draw Charges aktualisieren
-    if (newDrawChargeText != null)
+    public void Discard(DeckManager deckManager)
     {
-        newDrawChargeText.text = newDrawCharge.ToString();
-    }
-    else
-    {
-        Debug.LogError("TextMeshPro-Referenz für New Draw Charges wurde nicht gefunden.");
-    }
-}
-
-    // Methode für Discard
-public void Discard(DeckManager deckManager)
-{
-    if (currentlyZoomedCard != null)  // Überprüfen, ob eine Karte gezoomt ist
-    {
-        // Entfernen der gezoomten Karte
-        Destroy(currentlyZoomedCard.gameObject);
-
-        // Neue Karte nachziehen
-        deckManager.DrawCard();  // Ziehe eine neue Karte
-
-        // Discard Charge verringern
-        discardCharge--;
-
-        // Debug-Nachricht
-        Debug.Log("Gezoomte Karte verworfen. Verbleibende Discard Charges: " + discardCharge);
-
-        // Kartenzoom zurücksetzen
-        currentlyZoomedCard.ZoomOut();
-
-        // Update der Textanzeige für Discard Charges
-        if (discardChargeText != null)
+        if (currentlyZoomedCard != null)
         {
-            discardChargeText.text = discardCharge.ToString();
+            Destroy(currentlyZoomedCard.gameObject);
+
+            deckManager.DrawCard();
+
+            discardCharge--;
+
+            currentlyZoomedCard.ZoomOut();
+
+            if (discardChargeText != null)
+            {
+                discardChargeText.text = discardCharge.ToString();
+            }
         }
     }
-    else
-    {
-        // Kein Zoom, daher keine Karte zum Discarden
-        Debug.Log("Keine gezoomte Karte zum Verwerfen.");
-    }
-}
 
-    // Kaufen von Discard Charges
     public void BuyDiscard()
     {
         if (money >= 2)
         {
             money -= 2;
             discardCharge++;
-            Debug.Log("Discard Charge gekauft! Verbleibendes Geld: " + money);
-        }
-        else
-        {
-            Debug.Log("Nicht genug Geld, um eine Discard Charge zu kaufen.");
-        }
 
-        // Update der Textanzeige für Discard Charges
-        if (discardChargeText != null)
-        {
-            discardChargeText.text = discardCharge.ToString();
+            if (discardChargeText != null)
+            {
+                discardChargeText.text = discardCharge.ToString();
+            }
         }
     }
 
-    // Kaufen von New Draw Charges
     public void BuyNewDraw()
     {
         if (money >= 3)
         {
             money -= 3;
             newDrawCharge++;
-            Debug.Log("New Draw Charge gekauft! Verbleibendes Geld: " + money);
-        }
-        else
-        {
-            Debug.Log("Nicht genug Geld, um eine New Draw Charge zu kaufen.");
-        }
 
-        // Update der Textanzeige für New Draw Charges
-        if (newDrawChargeText != null)
-        {
-            newDrawChargeText.text = newDrawCharge.ToString();
+            if (newDrawChargeText != null)
+            {
+                newDrawChargeText.text = newDrawCharge.ToString();
+            }
         }
     }
 }

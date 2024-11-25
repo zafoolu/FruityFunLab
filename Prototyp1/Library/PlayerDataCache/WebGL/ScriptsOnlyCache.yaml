@@ -88,7 +88,7 @@ ScriptsOnlyBuild:
     methodName: PlayGame
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: BuyDiscardCharge
+    methodName: BuyDiscard
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: Play
@@ -97,10 +97,10 @@ ScriptsOnlyBuild:
     methodName: NewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: BuyNewDrawCharge
+    methodName: BuyNewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: DiscardCards
+    methodName: Discard
   - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
     methodName: LoadNextLevel
@@ -108,44 +108,50 @@ ScriptsOnlyBuild:
     fullTypeName: DeckManager
     methodName: HandleDeckClick
   - assembly: Assembly-CSharp
-    fullTypeName: Draggable
-    methodName: BuyNewDrawCharge
-  - assembly: Assembly-CSharp
-    fullTypeName: Draggable
-    methodName: Play
-  - assembly: Assembly-CSharp
-    fullTypeName: Draggable
-    methodName: NewDraw
-  - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
     methodName: LoadNextLevel
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: DiscardCards
-  - assembly: Assembly-CSharp
-    fullTypeName: Draggable
-    methodName: BuyDiscardCharge
-  - assembly: Assembly-CSharp
-    fullTypeName: DeckManager
-    methodName: HandleDeckClick
-  - assembly: Assembly-CSharp
-    fullTypeName: Draggable
     methodName: Play
-  - assembly: Assembly-CSharp
-    fullTypeName: Draggable
-    methodName: BuyNewDrawCharge
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: NewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: DiscardCards
+    methodName: Discard
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: BuyDiscardCharge
+    methodName: BuyDiscard
   - assembly: Assembly-CSharp
     fullTypeName: DeckManager
     methodName: HandleDeckClick
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: BuyNewDraw
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: BuyNewDraw
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: Play
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: NewDraw
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: BuyDiscard
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: Discard
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: LoadNextLevel
+  - assembly: Assembly-CSharp
+    fullTypeName: DeckManager
+    methodName: HandleDeckClick
+  - assembly: Assembly-CSharp
+    fullTypeName: CardCollectionManager
+    methodName: GoBack
   sceneClasses:
     Assets/Scenes/CardCollection.unity:
     - Class: 1
@@ -171,21 +177,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2816}
     - Class: 114
-      Script: {instanceID: 3860}
+      Script: {instanceID: 3862}
     - Class: 114
-      Script: {instanceID: 4730}
+      Script: {instanceID: 4732}
     - Class: 114
-      Script: {instanceID: 5602}
+      Script: {instanceID: 5604}
     - Class: 114
-      Script: {instanceID: 6072}
+      Script: {instanceID: 6074}
     - Class: 114
-      Script: {instanceID: 6576}
+      Script: {instanceID: 6578}
     - Class: 114
-      Script: {instanceID: 7118}
+      Script: {instanceID: 6786}
+    - Class: 114
+      Script: {instanceID: 7120}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -232,37 +240,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2536}
+      Script: {instanceID: 2078}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2538}
     - Class: 114
-      Script: {instanceID: 2746}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 3350}
+      Script: {instanceID: 2816}
     - Class: 114
-      Script: {instanceID: 3730}
+      Script: {instanceID: 3352}
     - Class: 114
-      Script: {instanceID: 4858}
+      Script: {instanceID: 3732}
     - Class: 114
-      Script: {instanceID: 4978}
+      Script: {instanceID: 4860}
     - Class: 114
-      Script: {instanceID: 4986}
+      Script: {instanceID: 4980}
     - Class: 114
-      Script: {instanceID: 5050}
+      Script: {instanceID: 4988}
     - Class: 114
-      Script: {instanceID: 5198}
+      Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5602}
+      Script: {instanceID: 5200}
     - Class: 114
-      Script: {instanceID: 5754}
+      Script: {instanceID: 5604}
     - Class: 114
-      Script: {instanceID: 6072}
+      Script: {instanceID: 5756}
     - Class: 114
-      Script: {instanceID: 6784}
+      Script: {instanceID: 6074}
     - Class: 114
-      Script: {instanceID: 24538}
+      Script: {instanceID: 6786}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -298,6 +306,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -307,35 +317,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2536}
+      Script: {instanceID: 2078}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2538}
     - Class: 114
-      Script: {instanceID: 2746}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 3350}
+      Script: {instanceID: 2816}
     - Class: 114
-      Script: {instanceID: 3730}
+      Script: {instanceID: 3352}
     - Class: 114
-      Script: {instanceID: 4858}
+      Script: {instanceID: 3732}
     - Class: 114
-      Script: {instanceID: 4978}
+      Script: {instanceID: 4860}
     - Class: 114
-      Script: {instanceID: 4986}
+      Script: {instanceID: 4980}
     - Class: 114
-      Script: {instanceID: 5050}
+      Script: {instanceID: 4988}
     - Class: 114
-      Script: {instanceID: 5198}
+      Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5602}
+      Script: {instanceID: 5200}
     - Class: 114
-      Script: {instanceID: 5754}
+      Script: {instanceID: 5604}
     - Class: 114
-      Script: {instanceID: 6072}
+      Script: {instanceID: 5756}
     - Class: 114
-      Script: {instanceID: 6784}
+      Script: {instanceID: 6074}
+    - Class: 114
+      Script: {instanceID: 6786}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -371,6 +383,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -380,35 +394,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2536}
+      Script: {instanceID: 2078}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2538}
     - Class: 114
-      Script: {instanceID: 2746}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 3350}
+      Script: {instanceID: 2816}
     - Class: 114
-      Script: {instanceID: 3730}
+      Script: {instanceID: 3352}
     - Class: 114
-      Script: {instanceID: 4858}
+      Script: {instanceID: 3732}
     - Class: 114
-      Script: {instanceID: 4978}
+      Script: {instanceID: 4860}
     - Class: 114
-      Script: {instanceID: 4986}
+      Script: {instanceID: 4980}
     - Class: 114
-      Script: {instanceID: 5050}
+      Script: {instanceID: 4988}
     - Class: 114
-      Script: {instanceID: 5198}
+      Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5602}
+      Script: {instanceID: 5200}
     - Class: 114
-      Script: {instanceID: 5754}
+      Script: {instanceID: 5604}
     - Class: 114
-      Script: {instanceID: 6072}
+      Script: {instanceID: 5756}
     - Class: 114
-      Script: {instanceID: 6784}
+      Script: {instanceID: 6074}
+    - Class: 114
+      Script: {instanceID: 6786}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -453,27 +469,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2186}
+      Script: {instanceID: 2188}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2816}
     - Class: 114
-      Script: {instanceID: 3980}
+      Script: {instanceID: 3982}
     - Class: 114
-      Script: {instanceID: 4086}
+      Script: {instanceID: 4088}
     - Class: 114
-      Script: {instanceID: 4338}
+      Script: {instanceID: 4340}
     - Class: 114
-      Script: {instanceID: 4654}
+      Script: {instanceID: 4656}
     - Class: 114
-      Script: {instanceID: 5050}
+      Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5602}
+      Script: {instanceID: 5604}
     - Class: 114
-      Script: {instanceID: 6072}
+      Script: {instanceID: 6074}
     - Class: 114
-      Script: {instanceID: 6784}
+      Script: {instanceID: 6786}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -563,6 +579,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: SimpleScript
+  - hash:
+      serializedVersion: 2
+      Hash: f9a6eda9991832c5bb4fb52505459c32
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: DropZone
   - hash:
       serializedVersion: 2
       Hash: b12640dfdb5966813e9dd838893e6c4a
@@ -799,7 +821,7 @@ ScriptsOnlyBuild:
     className: ScriptMachine
   - hash:
       serializedVersion: 2
-      Hash: 9abae9aeda0c209dcbe469bd04104360
+      Hash: 24cebbcb49fe75e7f2ab76ca85329daf
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: EndscreenManager
@@ -1171,7 +1193,7 @@ ScriptsOnlyBuild:
     className: UnityOnBecameInvisibleMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 13b2541ef6f9c3634ca708582f49bb30
+      Hash: 36c934f8a5ca3375a7e184f7d89ec124
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Draggable
@@ -1565,12 +1587,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: f9a6eda9991832c5bb4fb52505459c32
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: DropZone
   platform: 20
   scenePathNames:
   - Assets/Scenes/MainMenu.unity

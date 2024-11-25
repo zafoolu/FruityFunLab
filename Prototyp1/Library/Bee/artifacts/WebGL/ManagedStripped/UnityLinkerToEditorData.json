@@ -48,7 +48,9 @@
           {
             "name": "AudioClip",
             "scenes": [
-              "Assets/Scenes/Level1.unity"
+              "Assets/Scenes/Level1.unity",
+              "Assets/Scenes/Level2.unity",
+              "Assets/Scenes/Level3.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -80,7 +82,9 @@
           {
             "name": "SampleClip",
             "scenes": [
-              "Assets/Scenes/Level1.unity"
+              "Assets/Scenes/Level1.unity",
+              "Assets/Scenes/Level2.unity",
+              "Assets/Scenes/Level3.unity"
             ],
             "dependencyType": 1,
             "icon": null

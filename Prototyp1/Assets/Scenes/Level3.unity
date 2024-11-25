@@ -924,6 +924,81 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &370720169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370720170}
+  - component: {fileID: 370720172}
+  - component: {fileID: 370720171}
+  m_Layer: 5
+  m_Name: GameOverScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &370720170
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370720169}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1434613399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &370720171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370720169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: da60396fe1d77914eab359ec198949fa, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &370720172
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370720169}
+  m_CullTransparentMesh: 1
 --- !u!1 &407158457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1428,7 @@ MonoBehaviour:
   typeOfFood: 0
   isDragging: 0
   parenToReturnTo: {fileID: 0}
+  endscreenManager: {fileID: 672013949}
   zoomedScale: {x: 0, y: 0, z: 0}
   zoomedPosition: {x: 0, y: 0}
   Protein: 0
@@ -1399,6 +1475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endscreenPanel: {fileID: 314346918}
+  gameOverPanel: {fileID: 370720169}
   totalProteinText: {fileID: 1667730531}
   totalCarbsText: {fileID: 1108948654}
   totalEtcText: {fileID: 577795557}
@@ -1407,9 +1484,11 @@ MonoBehaviour:
   totalMineralsText: {fileID: 190977021}
   totalPointsText: {fileID: 967542038}
   moneyText: {fileID: 1201067934}
+  handPanel: {fileID: 1097419313}
   maxPointsLevel1: 60
   maxPointsLevel2: 70
   maxPointsLevel3: 80
+  deckManager: {fileID: 1831941495}
 --- !u!114 &672013950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,7 +2181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -239.18365, y: -58.63501}
+  m_AnchoredPosition: {x: -239.18372, y: -58.63507}
   m_SizeDelta: {x: -1581.2423, y: -899.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951907607
@@ -2280,6 +2359,7 @@ MonoBehaviour:
   typeOfFood: 0
   isDragging: 0
   parenToReturnTo: {fileID: 0}
+  endscreenManager: {fileID: 0}
   zoomedScale: {x: 0, y: 0, z: 0}
   zoomedPosition: {x: 0, y: 0}
   Protein: 0
@@ -3142,7 +3222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 314, y: 16.511}
+  m_AnchoredPosition: {x: 314, y: 16.511047}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1122570559
@@ -4094,6 +4174,7 @@ RectTransform:
   - {fileID: 672297104}
   - {fileID: 1831941492}
   - {fileID: 314346919}
+  - {fileID: 370720170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4972,7 +5053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 642, y: -37.464}
+  m_AnchoredPosition: {x: 642, y: -37.46405}
   m_SizeDelta: {x: -1692.2108, y: -857.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1630169650
@@ -6069,6 +6150,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 5803009262139425360, guid: b3c73e67438c44f44b332ec9e1a63774, type: 3}
   handPanel: {fileID: 1097419314}
   deckImage: {fileID: 1831941489}
+  clickCount: 0
 --- !u!114 &1831941496
 MonoBehaviour:
   m_ObjectHideFlags: 0

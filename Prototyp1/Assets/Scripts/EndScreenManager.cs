@@ -7,6 +7,9 @@ public class EndscreenManager : MonoBehaviour
     // Dein Endscreen Panel
     public GameObject endscreenPanel;
 
+    // Game Over Panel
+    public GameObject gameOverPanel;
+
     // Textfelder für die Gesamtwerte
     public TextMeshProUGUI totalProteinText;
     public TextMeshProUGUI totalCarbsText;
@@ -17,10 +20,16 @@ public class EndscreenManager : MonoBehaviour
     public TextMeshProUGUI totalPointsText;
     public TextMeshProUGUI moneyText;
 
+    // Referenz zum Hand-Panel (zum Zählen der Karten)
+    public GameObject handPanel;
+
     // Neue Variablen für maximale Punktzahlen auf jedem Level
     public int maxPointsLevel1 = 60;
     public int maxPointsLevel2 = 70;
     public int maxPointsLevel3 = 80;
+
+    // Referenz zum DeckManager Skript
+    public DeckManager deckManager;
 
     private bool isGameOver = false;
 
@@ -35,8 +44,9 @@ public class EndscreenManager : MonoBehaviour
         Draggable.totalMinerals = 0;
         Draggable.totalPoints = 0;
 
-        // Endscreen Panel ausblenden
+        // Endscreen Panel und Game Over Panel ausblenden
         endscreenPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
 
         Debug.Log("Alle total-Werte wurden zurückgesetzt.");
     }
@@ -81,6 +91,33 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
+    // Methode zur Überprüfung, ob das Game Over erreicht wurde
+    public void CheckGameOver()
+    {
+        int levelTargetPoints = GetLevelTargetPoints(SceneManager.GetActiveScene().name);
+
+        // Überprüfe, ob die Anzahl der Karten im Hand-Panel 0 ist, der ClickCount 9 ist und die Punktzahl nicht passt
+        bool isHandEmpty = handPanel.transform.childCount == 0;  // Überprüfen, ob keine Karten mehr im Hand-Panel sind
+        bool isClickCountNine = deckManager.clickCount == 9; // Überprüfen, ob der Click Count 9 ist
+        bool isScoreNotMatching = Draggable.totalPoints < levelTargetPoints;  // Überprüfen, ob die Punktzahl nicht ausreicht
+
+        if (isHandEmpty && isClickCountNine && isScoreNotMatching)
+        {
+            ShowGameOver();
+        }
+    }
+
+    // Game Over anzeigen
+    public void ShowGameOver()
+    {
+        isGameOver = true;
+
+        // Game Over Panel anzeigen
+        gameOverPanel.SetActive(true);
+
+        Debug.Log("Game Over wurde angezeigt.");
+    }
+
     // Endscreen anzeigen
     public void ShowEndscreen()
     {
@@ -97,49 +134,46 @@ public class EndscreenManager : MonoBehaviour
         UpdateTextWithColorForCalories(totalCaloriesText, Draggable.totalCalories, 
             new int[] { 0, 300, 700, 900, 1300 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        totalEtcText.text = $"Total Etc: {Draggable.totalEtc}";
-        totalVitaminsText.text = $"Total Vitamins: {Draggable.totalVitamins}";
-        totalMineralsText.text = $"Total Minerals: {Draggable.totalMinerals}";
-        totalPointsText.text = $"Total Points: {Draggable.totalPoints}";
+        UpdateTextWithColor(totalEtcText, Draggable.totalEtc / 10f, 
+            new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        // Endscreen Panel aktivieren
-        endscreenPanel.SetActive(true);
+        UpdateTextWithColorForVitamins(totalVitaminsText, Draggable.totalVitamins, 
+            new int[] { 0, 5, 10, 12, 16 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        Debug.Log("Endscreen wurde angezeigt.");
+        UpdateTextWithColorForMinerals(totalMineralsText, Draggable.totalMinerals, 
+            new int[] { 0, 5, 10, 12, 16 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
+
+        totalPointsText.text = $"{Draggable.totalPoints}";
+        endscreenPanel.SetActive(true); // Endscreen Panel anzeigen
     }
 
-    // Hilfsmethode, um den Text mit Farbe basierend auf dem Wert zu aktualisieren
-    private void UpdateTextWithColor(TextMeshProUGUI textField, float value, int[] thresholds, Color[] colors)
+    // Text-Update für Protein, Carbs etc.
+    void UpdateTextWithColor(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
     {
-        textField.text = $"{textField.text.Split(':')[0]}: {value:F2}";
-
-        for (int i = 0; i < thresholds.Length - 1; i++)
+        text.text = $"{value}"; // Zeige den Wert
+        for (int i = 0; i < thresholds.Length; i++)
         {
-            if (value >= thresholds[i] && value < thresholds[i + 1])
+            if (value >= thresholds[i])
             {
-                textField.color = colors[i];
-                return;
+                text.color = colors[i];
             }
         }
-
-        textField.color = colors[colors.Length - 1];
     }
 
-    // Spezielle Methode, um den Text mit Farbe für die Kalorien zu aktualisieren
-    private void UpdateTextWithColorForCalories(TextMeshProUGUI textField, float value, int[] thresholds, Color[] colors)
+    // Gleiches für Calories, Vitamins und Minerals (mit anderen Schwellenwerten)
+    void UpdateTextWithColorForCalories(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
     {
-        textField.text = $"{textField.text.Split(':')[0]}: {value}";
+        UpdateTextWithColor(text, value, thresholds, colors);
+    }
 
-        for (int i = 0; i < thresholds.Length - 1; i++)
-        {
-            if (value >= thresholds[i] && value < thresholds[i + 1])
-            {
-                textField.color = colors[i];
-                return;
-            }
-        }
+    void UpdateTextWithColorForVitamins(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
+    {
+        UpdateTextWithColor(text, value, thresholds, colors);
+    }
 
-        textField.color = colors[colors.Length - 1];
+    void UpdateTextWithColorForMinerals(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
+    {
+        UpdateTextWithColor(text, value, thresholds, colors);
     }
 
     // Methode zum Laden der nächsten Szene
@@ -173,6 +207,11 @@ public class EndscreenManager : MonoBehaviour
         if (endscreenPanel != null)
         {
             endscreenPanel.SetActive(false);
+        }
+
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
         }
 
         isGameOver = false;

@@ -8,8 +8,11 @@ public class DeckManager : MonoBehaviour
     public GameObject cardPrefab;
     public Transform handPanel;
     public GameObject deckImage;
+    public static int cardsDrawn = 0; // Neuer Zähler für gezogene Karten
+private const int maxCards = 9;  // Maximale Anzahl an Karten
 
-    private int clickCount = 0;
+
+    public int clickCount = 0;
 
     void Start()
     {
@@ -18,7 +21,7 @@ public class DeckManager : MonoBehaviour
 
     public void HandleDeckClick()
     {
-        if (clickCount >= 9)
+        if (clickCount >= maxCards)
         {
             Debug.Log("Du hast bereits 7 Karten gezogen. Weitere Ziehungen sind nicht mehr möglich.");
             return;
@@ -27,7 +30,7 @@ public class DeckManager : MonoBehaviour
         DrawCard();
         clickCount++;
 
-        if (clickCount >= 9)
+        if (clickCount >= maxCards)
         {
             Debug.Log("Maximale Kartenanzahl (7) erreicht. Weitere Ziehungen sind deaktiviert.");
         }
