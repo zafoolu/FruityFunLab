@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        FindObjectOfType<AudioManager>().Play("ui_click");
         SceneManager.LoadScene("Level1");      //
     }
     public void QuitGame()
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLibrary()
     {
+         FindObjectOfType<AudioManager>().Play("ui_click");
         SceneManager.LoadScene("CardCollection");
     }
 

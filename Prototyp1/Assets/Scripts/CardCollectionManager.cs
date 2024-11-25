@@ -60,6 +60,8 @@ public class CardCollectionManager : MonoBehaviour
 
     public void GoBack ()
     {
+        FindObjectOfType<AudioManager>().Play("ui_click");
         SceneManager.LoadScene("MainMenu");
+        
     }
 }

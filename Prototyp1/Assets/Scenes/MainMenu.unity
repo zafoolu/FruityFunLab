@@ -657,6 +657,76 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &841239033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841239035}
+  - component: {fileID: 841239034}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &841239034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841239033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8c616fde7949e4f876c191b9127022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: coin_sound
+    clip: {fileID: 8300000, guid: e8654aadb690eb64fb148192f14a5483, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ui_click
+    clip: {fileID: 8300000, guid: dea22bfccd630714da26816a748f048f, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: draw_sound
+    clip: {fileID: 8300000, guid: ec7d4506deae2dc4d91bad801a68c685, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: play_sound
+    clip: {fileID: 8300000, guid: 905462f85196aac4b9dc4efdb0e8d52d, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: discard_sound
+    clip: {fileID: 8300000, guid: e0c9f093f4ed2f04493c6a45aca061c6, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+--- !u!4 &841239035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841239033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1075349651
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,3 +932,4 @@ SceneRoots:
   - {fileID: 769750279}
   - {fileID: 683864990}
   - {fileID: 277569510}
+  - {fileID: 841239035}
