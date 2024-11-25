@@ -125,32 +125,32 @@ public class EndscreenManager : MonoBehaviour
         isGameOver = true;
 
         // Textfelder für die Gesamtwerte und Punkte anzeigen
-        UpdateTextWithColor(totalProteinText, Draggable.totalProtein / 10f, 
+        UpdateTextWithColor(totalProteinText, "TOTAL PROTEIN", Draggable.totalProtein / 10f, 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColor(totalCarbsText, Draggable.totalCarbs / 10f, 
+        UpdateTextWithColor(totalCarbsText, "TOTAL CARBS", Draggable.totalCarbs / 10f, 
             new int[] { 0, 225, 325, 375, 475 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColorForCalories(totalCaloriesText, Draggable.totalCalories, 
+        UpdateTextWithColor(totalCaloriesText, "TOTAL CALORIES", Draggable.totalCalories, 
             new int[] { 0, 300, 700, 900, 1300 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColor(totalEtcText, Draggable.totalEtc / 10f, 
+        UpdateTextWithColor(totalEtcText, "TOTAL ETC", Draggable.totalEtc / 10f, 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColorForVitamins(totalVitaminsText, Draggable.totalVitamins, 
+        UpdateTextWithColor(totalVitaminsText, "TOTAL VITAMINS", Draggable.totalVitamins, 
             new int[] { 0, 5, 10, 12, 16 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColorForMinerals(totalMineralsText, Draggable.totalMinerals, 
+        UpdateTextWithColor(totalMineralsText, "TOTAL MINERALS", Draggable.totalMinerals, 
             new int[] { 0, 5, 10, 12, 16 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        totalPointsText.text = $"{Draggable.totalPoints}";
+        totalPointsText.text = $"TOTAL POINTS: {Draggable.totalPoints}";
         endscreenPanel.SetActive(true); // Endscreen Panel anzeigen
     }
 
     // Text-Update für Protein, Carbs etc.
-    void UpdateTextWithColor(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
+    void UpdateTextWithColor(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        text.text = $"{value}"; // Zeige den Wert
+        text.text = $"{prefix}: {value}"; // Zeige den Wert mit Prefix
         for (int i = 0; i < thresholds.Length; i++)
         {
             if (value >= thresholds[i])
@@ -161,19 +161,19 @@ public class EndscreenManager : MonoBehaviour
     }
 
     // Gleiches für Calories, Vitamins und Minerals (mit anderen Schwellenwerten)
-    void UpdateTextWithColorForCalories(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
+    void UpdateTextWithColorForCalories(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        UpdateTextWithColor(text, value, thresholds, colors);
+        UpdateTextWithColor(text, prefix, value, thresholds, colors);
     }
 
-    void UpdateTextWithColorForVitamins(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
+    void UpdateTextWithColorForVitamins(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        UpdateTextWithColor(text, value, thresholds, colors);
+        UpdateTextWithColor(text, prefix, value, thresholds, colors);
     }
 
-    void UpdateTextWithColorForMinerals(TextMeshProUGUI text, float value, int[] thresholds, Color[] colors)
+    void UpdateTextWithColorForMinerals(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        UpdateTextWithColor(text, value, thresholds, colors);
+        UpdateTextWithColor(text, prefix, value, thresholds, colors);
     }
 
     // Methode zum Laden der nächsten Szene
@@ -219,12 +219,13 @@ public class EndscreenManager : MonoBehaviour
         Debug.Log($"Szene {scene.name} wurde geladen. Endscreen zurückgesetzt.");
     }
 
-
-    public void GoBack(){
+    public void GoBack()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void TryAgain(){
+    public void TryAgain()
+    {
         SceneManager.LoadScene("Level1");
     }
 }

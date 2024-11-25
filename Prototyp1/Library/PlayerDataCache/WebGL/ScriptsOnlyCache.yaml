@@ -82,11 +82,14 @@ ScriptsOnlyBuild:
   methodsToPreserve:
   - assembly: Assembly-CSharp
     fullTypeName: MainMenu
-    methodName: LoadLibrary
-  - assembly: Assembly-CSharp
-    fullTypeName: MainMenu
     methodName: PlayGame
   - assembly: Assembly-CSharp
+    fullTypeName: MainMenu
+    methodName: LoadLibrary
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: GoBack
+  - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: BuyDiscard
   - assembly: Assembly-CSharp
@@ -103,6 +106,9 @@ ScriptsOnlyBuild:
     methodName: Discard
   - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
+    methodName: TryAgain
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
     methodName: LoadNextLevel
   - assembly: Assembly-CSharp
     fullTypeName: DeckManager
@@ -110,6 +116,12 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
     methodName: LoadNextLevel
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: TryAgain
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: GoBack
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: Play
@@ -128,6 +140,12 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: BuyNewDraw
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: GoBack
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: TryAgain
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: BuyNewDraw
@@ -168,6 +186,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -184,6 +204,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3862}
     - Class: 114
       Script: {instanceID: 4732}
+    - Class: 114
+      Script: {instanceID: 4860}
     - Class: 114
       Script: {instanceID: 5604}
     - Class: 114
@@ -460,6 +482,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -482,6 +506,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4340}
     - Class: 114
       Script: {instanceID: 4656}
+    - Class: 114
+      Script: {instanceID: 4860}
     - Class: 114
       Script: {instanceID: 5052}
     - Class: 114
@@ -821,7 +847,7 @@ ScriptsOnlyBuild:
     className: ScriptMachine
   - hash:
       serializedVersion: 2
-      Hash: 24cebbcb49fe75e7f2ab76ca85329daf
+      Hash: a70d152e7588e3da16967343c6f15501
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: EndscreenManager
@@ -893,7 +919,7 @@ ScriptsOnlyBuild:
     className: VertexShakeB
   - hash:
       serializedVersion: 2
-      Hash: c976feb305f2e14fb824ad0cbf1b54f4
+      Hash: 900feffd513a13fb414fb9e8174cf563
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: DeckManager
@@ -1193,7 +1219,7 @@ ScriptsOnlyBuild:
     className: UnityOnBecameInvisibleMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 36c934f8a5ca3375a7e184f7d89ec124
+      Hash: e316032a53b6baba589d4e1d87f4e402
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Draggable

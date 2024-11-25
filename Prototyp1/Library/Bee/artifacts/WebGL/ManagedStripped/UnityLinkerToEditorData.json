@@ -48,9 +48,11 @@
           {
             "name": "AudioClip",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
-              "Assets/Scenes/Level3.unity"
+              "Assets/Scenes/Level3.unity",
+              "Assets/Scenes/MainMenu.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -82,9 +84,11 @@
           {
             "name": "SampleClip",
             "scenes": [
+              "Assets/Scenes/CardCollection.unity",
               "Assets/Scenes/Level1.unity",
               "Assets/Scenes/Level2.unity",
-              "Assets/Scenes/Level3.unity"
+              "Assets/Scenes/Level3.unity",
+              "Assets/Scenes/MainMenu.unity"
             ],
             "dependencyType": 1,
             "icon": null

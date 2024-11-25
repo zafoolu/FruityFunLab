@@ -54,11 +54,17 @@ extern void EndscreenManager_OnEnable_m4C4C684BC22F4CC73056555A7EB0730778BA1931 
 extern void EndscreenManager_OnDisable_mBD4169834EA59B3F41585388B72257DDD6C6D309 (void);
 extern void EndscreenManager_Update_m74F0B8099DFF6F0F1E82AFB9F2249DC0D037E2D7 (void);
 extern void EndscreenManager_GetLevelTargetPoints_m3762658A6E524780E585599699EDD047FC8F50A1 (void);
+extern void EndscreenManager_CheckGameOver_m71583285780470A622467C5BA15452480D662FF7 (void);
+extern void EndscreenManager_ShowGameOver_mF1EFCEC850E3DB9B414DC36F5CEEE332BCE35BF0 (void);
 extern void EndscreenManager_ShowEndscreen_m75AB9206781FD0CD8FF6CC12D429FE35A7B41DFA (void);
-extern void EndscreenManager_UpdateTextWithColor_mE01B90A0E8DF8027E576585940BFAB4A5C738985 (void);
-extern void EndscreenManager_UpdateTextWithColorForCalories_m7F7411BB0FCEA1D0D50B393E0FF965AE931527C8 (void);
+extern void EndscreenManager_UpdateTextWithColor_m3C2708DF995C0EFA08CE3BD6695873323F87B018 (void);
+extern void EndscreenManager_UpdateTextWithColorForCalories_m90AA817FA875B01E1ACD18E463B467E1D006DAD7 (void);
+extern void EndscreenManager_UpdateTextWithColorForVitamins_m453684340E355118A7283AB210227FEF52E4AF76 (void);
+extern void EndscreenManager_UpdateTextWithColorForMinerals_m49B5B297812D553E93C1E46C04FEC5B5FDA891DC (void);
 extern void EndscreenManager_LoadNextLevel_mD16345A2E95B4AB2A1B9563C37BA213B031BA909 (void);
 extern void EndscreenManager_OnSceneLoaded_mCFF22C5F52AF0049C8B723CF125C30A2B8B8BD3E (void);
+extern void EndscreenManager_GoBack_m22C0369E527A4B09437130BE95618450143AD726 (void);
+extern void EndscreenManager_TryAgain_m6882FF2DD5D618F111D8F36B4C9DF32017E6D959 (void);
 extern void EndscreenManager__ctor_m5D0FD14564119A31522E8B0B98B62314E31BB889 (void);
 extern void Hand_OnPointerEnter_mB27143AEA1F1D2ABD43837836C181DC3AAA38E41 (void);
 extern void Hand_OnPointerExit_mAA5AA3AC1E69266992B22BFA16664DFB752A8B43 (void);
@@ -338,7 +344,7 @@ extern void U3CWarpTextU3Ed__8_MoveNext_mCE7A826C5E4854C2C509C77BD18F5A9B6D691B0
 extern void U3CWarpTextU3Ed__8_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mD80368E9B7E259311C03E406B75161ED6F7618E3 (void);
 extern void U3CWarpTextU3Ed__8_System_Collections_IEnumerator_Reset_m07746C332D2D8CE5DEA59873C26F2FAD4B369B42 (void);
 extern void U3CWarpTextU3Ed__8_System_Collections_IEnumerator_get_Current_m71D7F84D9DEF63BEC6B44866515DDCF35B142A19 (void);
-static Il2CppMethodPointer s_methodPointers[326] = 
+static Il2CppMethodPointer s_methodPointers[332] = 
 {
 	AudioManager_Awake_m8138BCED4D692C83C95626A1A09AB46EA5205569,
 	AudioManager_Play_mB69D5512DD0ECB0B853CD681D2282DC78844DE4F,
@@ -382,11 +388,17 @@ static Il2CppMethodPointer s_methodPointers[326] =
 	EndscreenManager_OnDisable_mBD4169834EA59B3F41585388B72257DDD6C6D309,
 	EndscreenManager_Update_m74F0B8099DFF6F0F1E82AFB9F2249DC0D037E2D7,
 	EndscreenManager_GetLevelTargetPoints_m3762658A6E524780E585599699EDD047FC8F50A1,
+	EndscreenManager_CheckGameOver_m71583285780470A622467C5BA15452480D662FF7,
+	EndscreenManager_ShowGameOver_mF1EFCEC850E3DB9B414DC36F5CEEE332BCE35BF0,
 	EndscreenManager_ShowEndscreen_m75AB9206781FD0CD8FF6CC12D429FE35A7B41DFA,
-	EndscreenManager_UpdateTextWithColor_mE01B90A0E8DF8027E576585940BFAB4A5C738985,
-	EndscreenManager_UpdateTextWithColorForCalories_m7F7411BB0FCEA1D0D50B393E0FF965AE931527C8,
+	EndscreenManager_UpdateTextWithColor_m3C2708DF995C0EFA08CE3BD6695873323F87B018,
+	EndscreenManager_UpdateTextWithColorForCalories_m90AA817FA875B01E1ACD18E463B467E1D006DAD7,
+	EndscreenManager_UpdateTextWithColorForVitamins_m453684340E355118A7283AB210227FEF52E4AF76,
+	EndscreenManager_UpdateTextWithColorForMinerals_m49B5B297812D553E93C1E46C04FEC5B5FDA891DC,
 	EndscreenManager_LoadNextLevel_mD16345A2E95B4AB2A1B9563C37BA213B031BA909,
 	EndscreenManager_OnSceneLoaded_mCFF22C5F52AF0049C8B723CF125C30A2B8B8BD3E,
+	EndscreenManager_GoBack_m22C0369E527A4B09437130BE95618450143AD726,
+	EndscreenManager_TryAgain_m6882FF2DD5D618F111D8F36B4C9DF32017E6D959,
 	EndscreenManager__ctor_m5D0FD14564119A31522E8B0B98B62314E31BB889,
 	Hand_OnPointerEnter_mB27143AEA1F1D2ABD43837836C181DC3AAA38E41,
 	Hand_OnPointerExit_mAA5AA3AC1E69266992B22BFA16664DFB752A8B43,
@@ -667,7 +679,7 @@ static Il2CppMethodPointer s_methodPointers[326] =
 	U3CWarpTextU3Ed__8_System_Collections_IEnumerator_Reset_m07746C332D2D8CE5DEA59873C26F2FAD4B369B42,
 	U3CWarpTextU3Ed__8_System_Collections_IEnumerator_get_Current_m71D7F84D9DEF63BEC6B44866515DDCF35B142A19,
 };
-static const int32_t s_InvokerIndices[326] = 
+static const int32_t s_InvokerIndices[332] = 
 {
 	4475,
 	3607,
@@ -700,7 +712,7 @@ static const int32_t s_InvokerIndices[326] =
 	4475,
 	4475,
 	4475,
-	6440,
+	6441,
 	4475,
 	3607,
 	3607,
@@ -712,10 +724,16 @@ static const int32_t s_InvokerIndices[326] =
 	4475,
 	3012,
 	4475,
-	715,
-	715,
+	4475,
+	4475,
+	351,
+	351,
+	351,
+	351,
 	4475,
 	1974,
+	4475,
+	4475,
 	4475,
 	3607,
 	3607,
@@ -743,7 +761,7 @@ static const int32_t s_InvokerIndices[326] =
 	4377,
 	4475,
 	4377,
-	6444,
+	6445,
 	4475,
 	889,
 	4475,
@@ -863,7 +881,7 @@ static const int32_t s_InvokerIndices[326] =
 	4377,
 	4377,
 	4475,
-	6440,
+	6441,
 	3582,
 	4475,
 	4301,
@@ -1000,7 +1018,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	326,
+	332,
 	s_methodPointers,
 	0,
 	NULL,
