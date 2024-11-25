@@ -27,6 +27,8 @@ private const int maxCards = 9;  // Maximale Anzahl an Karten
             return;
         }
 
+        
+        FindObjectOfType<AudioManager>().Play("draw_sound");
         DrawCard();
         clickCount++;
 

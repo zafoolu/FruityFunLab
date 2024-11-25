@@ -105,7 +105,7 @@ public static int totalPlayedCards = 0;
         if (distance > dragThreshold)
         {
             isDragging = true;
-
+            FindObjectOfType<AudioManager>().Play("draw_sound");
             parenToReturnTo = this.transform.parent;
             this.transform.SetParent(this.transform.parent.parent);
             GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -124,6 +124,7 @@ public static int totalPlayedCards = 0;
 
         this.transform.SetParent(parenToReturnTo);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
+       FindObjectOfType<AudioManager>().Play("play_sound");
     }
 
     private void ZoomIn()
@@ -173,62 +174,72 @@ public static int totalPlayedCards = 0;
         this.transform.localScale = originalScale;
     }
 
-   public void Play()
+public void Play()
+{
+    // Bereinige das Spielfeld
+    GameObject playedCardsPanel = GameObject.Find("Arena");
+
+    foreach (Transform child in playedCardsPanel.transform)
     {
-        // Bereinige das Spielfeld
-        GameObject playedCardsPanel = GameObject.Find("Arena");
+        Destroy(child.gameObject);
+    }
 
-        foreach (Transform child in playedCardsPanel.transform)
+    if (playedCardsPanel.transform.childCount == 0) return;
+
+    int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
+    int roundPoints = 0;
+    float comboMultiplier = 1f;
+
+    FindObjectOfType<AudioManager>().Play("play_sound");
+
+    foreach (Transform child in playedCardsPanel.transform)
+    {
+        Draggable card = child.GetComponent<Draggable>();
+
+        if (card == null) continue;
+
+        roundPoints += card.points;
+
+        totalProtein += card.Protein;
+        totalCarbs += card.Carbs;
+        totalEtc += card.Etc;
+        totalCalories += card.Calories;
+        totalMinerals += card.Minerals;
+        totalVitamins += card.Vitamins;
+
+        switch (card.foodType.ToLower())
         {
-            Destroy(child.gameObject);
-        }
-
-        if (playedCardsPanel.transform.childCount == 0) return;
-
-        int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
-        int roundPoints = 0;
-        float comboMultiplier = 1f;
-
-        foreach (Transform child in playedCardsPanel.transform)
-        {
-            Draggable card = child.GetComponent<Draggable>();
-
-            if (card == null) continue;
-
-            roundPoints += card.points;
-
-            totalProtein += card.Protein;
-            totalCarbs += card.Carbs;
-            totalEtc += card.Etc;
-            totalCalories += card.Calories;
-            totalMinerals += card.Minerals;
-            totalVitamins += card.Vitamins;
-
-            switch (card.foodType.ToLower())
-            {
-                case "obst": fruitCount++; break;
-                case "gemüse": vegetableCount++; break;
-                case "öl/fett": oilFatCount++; break;
-                case "fleisch": meatCount++; break;
-                case "getreide": grainCount++; break;
-                case "fisch": fishCount++; break;
-            }
-        }
-
-        if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
-        if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
-        if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
-        if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
-
-        roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
-        totalPoints += roundPoints;
-
-        // Am Ende des Plays: Überprüfe, ob das Spiel zu Ende ist
-        if (endscreenManager != null)
-        {
-            endscreenManager.CheckGameOver();
+            case "obst": fruitCount++; break;
+            case "gemüse": vegetableCount++; break;
+            case "öl/fett": oilFatCount++; break;
+            case "fleisch": meatCount++; break;
+            case "getreide": grainCount++; break;
+            case "fisch": fishCount++; break;
         }
     }
+
+    if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+    if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
+    if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+    if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
+
+    roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
+    totalPoints += roundPoints;
+
+    // Aktualisiere die Slider
+    if (proteinSlider != null) proteinSlider.value = totalProtein;
+    if (carbsSlider != null) carbsSlider.value = totalCarbs;
+    if (etcSlider != null) etcSlider.value = totalEtc;
+    if (caloriesSlider != null) caloriesSlider.value = totalCalories;
+    if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
+    if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
+
+    // Am Ende des Plays: Überprüfe, ob das Spiel zu Ende ist
+    if (endscreenManager != null)
+    {
+        endscreenManager.CheckGameOver();
+    }
+}
 
     public void NewDraw(DeckManager deckManager)
     {
@@ -240,7 +251,7 @@ public static int totalPlayedCards = 0;
             {
                 return;
             }
-
+            FindObjectOfType<AudioManager>().Play("discard_sound");
             int cardCount = handPanel.transform.childCount;
 
             foreach (Transform child in handPanel.transform)
@@ -255,7 +266,6 @@ public static int totalPlayedCards = 0;
                     deckManager.DrawCard();
                 }
             }
-
             newDrawCharge--;
 
             if (newDrawChargeText != null)
@@ -265,10 +275,13 @@ public static int totalPlayedCards = 0;
         }
     }
 
-    public void Discard(DeckManager deckManager)
+public void Discard(DeckManager deckManager)
+{
+    if (discardCharge > 0) // Überprüfen, ob discardCharge größer als 0 ist
     {
         if (currentlyZoomedCard != null)
         {
+            FindObjectOfType<AudioManager>().Play("discard_sound");
             Destroy(currentlyZoomedCard.gameObject);
 
             deckManager.DrawCard();
@@ -283,6 +296,11 @@ public static int totalPlayedCards = 0;
             }
         }
     }
+    else
+    {
+        Debug.Log("Not enough discard charges to discard a card.");
+    }
+}
 
     public void BuyDiscard()
     {
@@ -290,6 +308,7 @@ public static int totalPlayedCards = 0;
         {
             money -= 2;
             discardCharge++;
+            FindObjectOfType<AudioManager>().Play("coin_sound");
 
             if (discardChargeText != null)
             {
@@ -304,6 +323,7 @@ public static int totalPlayedCards = 0;
         {
             money -= 3;
             newDrawCharge++;
+             FindObjectOfType<AudioManager>().Play("coin_sound");
 
             if (newDrawChargeText != null)
             {

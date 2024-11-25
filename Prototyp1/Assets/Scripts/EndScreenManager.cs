@@ -218,4 +218,13 @@ public class EndscreenManager : MonoBehaviour
 
         Debug.Log($"Szene {scene.name} wurde geladen. Endscreen zurückgesetzt.");
     }
+
+
+    public void GoBack(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void TryAgain(){
+        SceneManager.LoadScene("Level1");
+    }
 }
