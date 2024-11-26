@@ -4,7 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class EndscreenManager : MonoBehaviour
 {
+    // Dein Endscreen Panel
     public GameObject endscreenPanel;
+
+    // Game Over Panel
+    public GameObject gameOverPanel;
+
+    // Textfelder für die Gesamtwerte
     public TextMeshProUGUI totalProteinText;
     public TextMeshProUGUI totalCarbsText;
     public TextMeshProUGUI totalEtcText;
@@ -14,13 +20,22 @@ public class EndscreenManager : MonoBehaviour
     public TextMeshProUGUI totalPointsText;
     public TextMeshProUGUI moneyText;
 
+    // Referenz zum Hand-Panel (zum Zählen der Karten)
+    public GameObject handPanel;
+
+    // Neue Variablen für maximale Punktzahlen auf jedem Level
+    public int maxPointsLevel1 = 60;
+    public int maxPointsLevel2 = 70;
+    public int maxPointsLevel3 = 80;
+
+    // Referenz zum DeckManager Skript
+    public DeckManager deckManager;
+
     private bool isGameOver = false;
 
-
-
-        void Awake()
+    void Awake()
     {
-         endscreenPanel.SetActive(false);
+        // Alle Gesamtwerte zurücksetzen
         Draggable.totalProtein = 0;
         Draggable.totalCarbs = 0;
         Draggable.totalEtc = 0;
@@ -29,9 +44,12 @@ public class EndscreenManager : MonoBehaviour
         Draggable.totalMinerals = 0;
         Draggable.totalPoints = 0;
 
+        // Endscreen Panel und Game Over Panel ausblenden
+        endscreenPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+
         Debug.Log("Alle total-Werte wurden zurückgesetzt.");
     }
-
 
     void OnEnable()
     {
@@ -47,68 +65,118 @@ public class EndscreenManager : MonoBehaviour
     {
         moneyText.text = $"{Draggable.money}";
 
-        if (!isGameOver && Draggable.totalPoints >= 60)
+        // Setze die maximalen Punktzahlen für das aktuelle Level
+        int levelTargetPoints = GetLevelTargetPoints(SceneManager.GetActiveScene().name);
+
+        // Wenn die Gesamtpunkte erreicht wurden, zeige den Endscreen an
+        if (!isGameOver && Draggable.totalPoints >= levelTargetPoints)
         {
             ShowEndscreen();
         }
     }
 
-    public void ShowEndscreen()
+    // Methode zur Rückgabe des Zielwerts für Punkte pro Level
+    int GetLevelTargetPoints(string sceneName)
     {
-        Draggable.money += 6;
+        switch (sceneName)
+        {
+            case "Level1":
+                return maxPointsLevel1; // Zielpunkte für Level 1
+            case "Level2":
+                return maxPointsLevel2; // Zielpunkte für Level 2
+            case "Level3":
+                return maxPointsLevel3; // Zielpunkte für Level 3
+            default:
+                return 60; // Standardwert
+        }
+    }
+
+    // Methode zur Überprüfung, ob das Game Over erreicht wurde
+    public void CheckGameOver()
+    {
+        int levelTargetPoints = GetLevelTargetPoints(SceneManager.GetActiveScene().name);
+
+        // Überprüfe, ob die Anzahl der Karten im Hand-Panel 0 ist, der ClickCount 9 ist und die Punktzahl nicht passt
+        bool isHandEmpty = handPanel.transform.childCount == 0;  // Überprüfen, ob keine Karten mehr im Hand-Panel sind
+        bool isClickCountNine = deckManager.clickCount == 9; // Überprüfen, ob der Click Count 9 ist
+        bool isScoreNotMatching = Draggable.totalPoints < levelTargetPoints;  // Überprüfen, ob die Punktzahl nicht ausreicht
+
+        if (isHandEmpty && isClickCountNine && isScoreNotMatching)
+        {
+            ShowGameOver();
+        }
+    }
+
+    // Game Over anzeigen
+    public void ShowGameOver()
+    {
         isGameOver = true;
 
-        UpdateTextWithColor(totalProteinText, Draggable.totalProtein / 10f, 
+        // Game Over Panel anzeigen
+        gameOverPanel.SetActive(true);
+
+        Debug.Log("Game Over wurde angezeigt.");
+    }
+
+    // Endscreen anzeigen
+    public void ShowEndscreen()
+    {
+        Draggable.money += 6; // Bonus bei Levelabschluss
+        isGameOver = true;
+
+        // Textfelder für die Gesamtwerte und Punkte anzeigen
+        UpdateTextWithColor(totalProteinText, "TOTAL PROTEIN", Draggable.totalProtein / 10f, 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColor(totalCarbsText, Draggable.totalCarbs / 10f, 
+        UpdateTextWithColor(totalCarbsText, "TOTAL CARBS", Draggable.totalCarbs / 10f, 
             new int[] { 0, 225, 325, 375, 475 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColorForCalories(totalCaloriesText, Draggable.totalCalories, 
+        UpdateTextWithColor(totalCaloriesText, "TOTAL CALORIES", Draggable.totalCalories, 
             new int[] { 0, 300, 700, 900, 1300 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        totalEtcText.text = $"Total Etc: {Draggable.totalEtc}";
-        totalVitaminsText.text = $"Total Vitamins: {Draggable.totalVitamins}";
-        totalMineralsText.text = $"Total Minerals: {Draggable.totalMinerals}";
-        totalPointsText.text = $"Total Points: {Draggable.totalPoints}";
+        UpdateTextWithColor(totalEtcText, "TOTAL ETC", Draggable.totalEtc / 10f, 
+            new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        endscreenPanel.SetActive(true);
+        UpdateTextWithColor(totalVitaminsText, "TOTAL VITAMINS", Draggable.totalVitamins, 
+            new int[] { 0, 5, 10, 12, 16 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        Debug.Log("Endscreen wurde angezeigt.");
+        UpdateTextWithColor(totalMineralsText, "TOTAL MINERALS", Draggable.totalMinerals, 
+            new int[] { 0, 5, 10, 12, 16 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
+
+        totalPointsText.text = $"TOTAL POINTS: {Draggable.totalPoints}";
+        endscreenPanel.SetActive(true); // Endscreen Panel anzeigen
     }
 
-    private void UpdateTextWithColor(TextMeshProUGUI textField, float value, int[] thresholds, Color[] colors)
+    // Text-Update für Protein, Carbs etc.
+    void UpdateTextWithColor(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        textField.text = $"{textField.text.Split(':')[0]}: {value:F2}";
-
-        for (int i = 0; i < thresholds.Length - 1; i++)
+        text.text = $"{prefix}: {value}"; // Zeige den Wert mit Prefix
+        for (int i = 0; i < thresholds.Length; i++)
         {
-            if (value >= thresholds[i] && value < thresholds[i + 1])
+            if (value >= thresholds[i])
             {
-                textField.color = colors[i];
-                return;
+                text.color = colors[i];
             }
         }
-
-        textField.color = colors[colors.Length - 1];
     }
 
-    private void UpdateTextWithColorForCalories(TextMeshProUGUI textField, float value, int[] thresholds, Color[] colors)
+    // Gleiches für Calories, Vitamins und Minerals (mit anderen Schwellenwerten)
+    void UpdateTextWithColorForCalories(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        textField.text = $"{textField.text.Split(':')[0]}: {value}";
-
-        for (int i = 0; i < thresholds.Length - 1; i++)
-        {
-            if (value >= thresholds[i] && value < thresholds[i + 1])
-            {
-                textField.color = colors[i];
-                return;
-            }
-        }
-
-        textField.color = colors[colors.Length - 1];
+        UpdateTextWithColor(text, prefix, value, thresholds, colors);
     }
 
+    void UpdateTextWithColorForVitamins(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
+    {
+        UpdateTextWithColor(text, prefix, value, thresholds, colors);
+    }
+
+    void UpdateTextWithColorForMinerals(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
+    {
+        UpdateTextWithColor(text, prefix, value, thresholds, colors);
+    }
+
+    // Methode zum Laden der nächsten Szene
     public void LoadNextLevel()
     {
         if (endscreenPanel != null)
@@ -133,6 +201,7 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
+    // Methode, die nach dem Laden einer neuen Szene aufgerufen wird
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (endscreenPanel != null)
@@ -140,8 +209,23 @@ public class EndscreenManager : MonoBehaviour
             endscreenPanel.SetActive(false);
         }
 
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
+
         isGameOver = false;
 
         Debug.Log($"Szene {scene.name} wurde geladen. Endscreen zurückgesetzt.");
+    }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void TryAgain()
+    {
+        SceneManager.LoadScene("Level1");
     }
 }

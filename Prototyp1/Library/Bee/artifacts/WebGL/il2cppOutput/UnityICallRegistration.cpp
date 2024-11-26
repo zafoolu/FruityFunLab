@@ -206,6 +206,10 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.AudioSource
 
+		//System.Void UnityEngine.AudioSource::PlayHelper(UnityEngine.AudioSource,System.UInt64)
+		void Register_UnityEngine_AudioSource_PlayHelper();
+		Register_UnityEngine_AudioSource_PlayHelper();
+
 		//System.Void UnityEngine.AudioSource::SetPitch(UnityEngine.AudioSource,System.Single)
 		void Register_UnityEngine_AudioSource_SetPitch();
 		Register_UnityEngine_AudioSource_SetPitch();
@@ -1369,6 +1373,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Boolean UnityEngine.Input::get_anyKey()
 		void Register_UnityEngine_Input_get_anyKey();
 		Register_UnityEngine_Input_get_anyKey();
+
+		//System.Boolean UnityEngine.Input::get_anyKeyDown()
+		void Register_UnityEngine_Input_get_anyKeyDown();
+		Register_UnityEngine_Input_get_anyKeyDown();
 
 		//System.Boolean UnityEngine.Input::get_mousePresent()
 		void Register_UnityEngine_Input_get_mousePresent();

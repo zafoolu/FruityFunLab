@@ -12,6 +12,9 @@ extern "C" void RegisterStaticallyLinkedModulesGranular()
 	void RegisterModule_Audio();
 	RegisterModule_Audio();
 
+	void RegisterModule_Grid();
+	RegisterModule_Grid();
+
 	void RegisterModule_InputLegacy();
 	RegisterModule_InputLegacy();
 
@@ -121,6 +124,8 @@ class Texture2DArray; template <> void RegisterUnityClass<Texture2DArray>(const 
 class Texture3D; template <> void RegisterUnityClass<Texture3D>(const char*);
 class TimeManager; template <> void RegisterUnityClass<TimeManager>(const char*);
 class Transform; template <> void RegisterUnityClass<Transform>(const char*);
+class Grid; template <> void RegisterUnityClass<Grid>(const char*);
+class GridLayout; template <> void RegisterUnityClass<GridLayout>(const char*);
 class Collider; template <> void RegisterUnityClass<Collider>(const char*);
 class PhysicsManager; template <> void RegisterUnityClass<PhysicsManager>(const char*);
 class Rigidbody; template <> void RegisterUnityClass<Rigidbody>(const char*);
@@ -137,7 +142,7 @@ void RegisterAllClasses()
 {
 void RegisterBuiltinTypes();
 RegisterBuiltinTypes();
-	//Total: 74 non stripped classes
+	//Total: 76 non stripped classes
 	//0. Animator
 	RegisterUnityClass<Animator>("Animation");
 	//1. AnimatorController
@@ -264,27 +269,31 @@ RegisterBuiltinTypes();
 	RegisterUnityClass<TimeManager>("Core");
 	//62. Transform
 	RegisterUnityClass<Transform>("Core");
-	//63. Collider
+	//63. Grid
+	RegisterUnityClass<Grid>("Grid");
+	//64. GridLayout
+	RegisterUnityClass<GridLayout>("Grid");
+	//65. Collider
 	RegisterUnityClass<Collider>("Physics");
-	//64. PhysicsManager
+	//66. PhysicsManager
 	RegisterUnityClass<PhysicsManager>("Physics");
-	//65. Rigidbody
+	//67. Rigidbody
 	RegisterUnityClass<Rigidbody>("Physics");
-	//66. BoxCollider2D
+	//68. BoxCollider2D
 	RegisterUnityClass<BoxCollider2D>("Physics2D");
-	//67. Collider2D
+	//69. Collider2D
 	RegisterUnityClass<Collider2D>("Physics2D");
-	//68. Physics2DSettings
+	//70. Physics2DSettings
 	RegisterUnityClass<Physics2DSettings>("Physics2D");
-	//69. Font
+	//71. Font
 	RegisterUnityClass<TextRendering::Font>("TextRendering");
-	//70. TextMesh
+	//72. TextMesh
 	RegisterUnityClass<TextRenderingPrivate::TextMesh>("TextRendering");
-	//71. Canvas
+	//73. Canvas
 	RegisterUnityClass<UI::Canvas>("UI");
-	//72. CanvasGroup
+	//74. CanvasGroup
 	RegisterUnityClass<UI::CanvasGroup>("UI");
-	//73. CanvasRenderer
+	//75. CanvasRenderer
 	RegisterUnityClass<UI::CanvasRenderer>("UI");
 
 }
