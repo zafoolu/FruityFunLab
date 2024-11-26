@@ -84,9 +84,12 @@ public static int totalPlayedCards = 0;
         isDragging = false;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+public void OnPointerUp(PointerEventData eventData)
+{
+    if (!isDragging)
     {
-        if (!isDragging)
+        // Überprüfe, ob die Karte sich im "Hand"-Panel befindet
+        if (transform.parent != null && transform.parent.name == "Hand")
         {
             if (!isZoomed)
             {
@@ -98,19 +101,36 @@ public static int totalPlayedCards = 0;
             }
         }
     }
-
-    public void OnBeginDrag(PointerEventData eventData)
+}
+   public void OnBeginDrag(PointerEventData eventData)
+{
+    // Wenn eine andere Karte gezoomt ist, entferne deren Zoom
+    if (currentlyZoomedCard != null && currentlyZoomedCard != this)
     {
-        float distance = Vector2.Distance(dragStartPos, eventData.position);
-        if (distance > dragThreshold)
-        {
-            isDragging = true;
-            FindObjectOfType<AudioManager>().Play("draw_sound");
-            parenToReturnTo = this.transform.parent;
-            this.transform.SetParent(this.transform.parent.parent);
-            GetComponent<CanvasGroup>().blocksRaycasts = false;
-        }
+        currentlyZoomedCard.ZoomOut();
     }
+
+    // Prüfen, ob diese Karte gezoomt ist, und den Zoom beenden
+    if (isZoomed)
+    {
+        ZoomOut();
+    }
+
+    // Beginne den Drag-Vorgang
+    float distance = Vector2.Distance(dragStartPos, eventData.position);
+    if (distance > dragThreshold)
+    {
+        isDragging = true;
+        FindObjectOfType<AudioManager>().Play("draw_sound");
+
+        // Setze das Parent für das Ziehen (z. B. an das Canvas übergeben)
+        parenToReturnTo = this.transform.parent;
+        this.transform.SetParent(this.transform.parent.parent);
+
+        // Blockiere Raycasts während des Ziehens
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+}
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -162,17 +182,18 @@ public static int totalPlayedCards = 0;
         this.transform.localScale = zoomedScale;
     }
 
-    private void ZoomOut()
-    {
-        isZoomed = false;
-        if (currentlyZoomedCard == this)
-        {
-            currentlyZoomedCard = null;
-        }
+private void ZoomOut()
+{
+    isZoomed = false;
 
-        rectTransform.anchoredPosition = originalPosition;
-        this.transform.localScale = originalScale;
+    if (currentlyZoomedCard == this)
+    {
+        currentlyZoomedCard = null;
     }
+
+    rectTransform.anchoredPosition = originalPosition;
+    this.transform.localScale = originalScale;
+}
 
 public void Play()
 {

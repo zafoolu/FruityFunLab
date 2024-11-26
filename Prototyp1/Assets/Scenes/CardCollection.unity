@@ -951,28 +951,6 @@ MonoBehaviour:
     Minerals: 0
     foodType: obst
     points: 5
-  - cardName: Apfel
-    value: 1
-    cardImage: {fileID: 21300000, guid: 68ba9d686222f2c4caba211420f8bb35, type: 3}
-    Protein: 3
-    Carbs: 140
-    Etc: 0
-    Calories: 61
-    Vitamins: 0
-    Minerals: 0
-    foodType: obst
-    points: 5
-  - cardName: Birne
-    value: 2
-    cardImage: {fileID: 21300000, guid: 851703d22daf5214b979ac23eb61e98c, type: 3}
-    Protein: 10
-    Carbs: 110
-    Etc: 0
-    Calories: 55
-    Vitamins: 0
-    Minerals: 0
-    foodType: obst
-    points: 5
   - cardName: Birne
     value: 2
     cardImage: {fileID: 21300000, guid: 851703d22daf5214b979ac23eb61e98c, type: 3}
@@ -995,28 +973,6 @@ MonoBehaviour:
     Minerals: 0
     foodType: "\xF6l/fett"
     points: 2
-  - cardName: Butter
-    value: 3
-    cardImage: {fileID: 21300000, guid: d1fd8395ef6ce0f478a70cce77fa3688, type: 3}
-    Protein: 0
-    Carbs: 0
-    Etc: 0
-    Calories: 75
-    Vitamins: 0
-    Minerals: 0
-    foodType: "\xF6l/fett"
-    points: 2
-  - cardName: Ente
-    value: 4
-    cardImage: {fileID: 21300000, guid: 67ba042ef18d59f4b9cb9cef3b3c98ce, type: 3}
-    Protein: 181
-    Carbs: 0
-    Etc: 0
-    Calories: 225
-    Vitamins: 0
-    Minerals: 0
-    foodType: fleisch
-    points: 3
   - cardName: Ente
     value: 4
     cardImage: {fileID: 21300000, guid: 67ba042ef18d59f4b9cb9cef3b3c98ce, type: 3}
@@ -1039,28 +995,6 @@ MonoBehaviour:
     Minerals: 0
     foodType: "gem\xFCse"
     points: 4
-  - cardName: Kartoffel
-    value: 5
-    cardImage: {fileID: 21300000, guid: eeefd4a42fc396d4bbd1478eebf7dae1, type: 3}
-    Protein: 20
-    Carbs: 150
-    Etc: 0
-    Calories: 76
-    Vitamins: 0
-    Minerals: 0
-    foodType: "gem\xFCse"
-    points: 4
-  - cardName: Mango
-    value: 6
-    cardImage: {fileID: 21300000, guid: bde0e6111f3626545a198239c6d58e6a, type: 3}
-    Protein: 6
-    Carbs: 130
-    Etc: 0
-    Calories: 61
-    Vitamins: 0
-    Minerals: 0
-    foodType: obst
-    points: 5
   - cardName: Mango
     value: 6
     cardImage: {fileID: 21300000, guid: bde0e6111f3626545a198239c6d58e6a, type: 3}
@@ -1079,28 +1013,6 @@ MonoBehaviour:
     Carbs: 26
     Etc: 0
     Calories: 17
-    Vitamins: 0
-    Minerals: 0
-    foodType: "gem\xFCse"
-    points: 5
-  - cardName: Tomate
-    value: 7
-    cardImage: {fileID: 21300000, guid: 1d588c1f04c0eec49a9a796f5972cd34, type: 3}
-    Protein: 10
-    Carbs: 26
-    Etc: 0
-    Calories: 17
-    Vitamins: 0
-    Minerals: 0
-    foodType: "gem\xFCse"
-    points: 5
-  - cardName: Paprika
-    value: 8
-    cardImage: {fileID: 21300000, guid: 7bec0168ba753fc438d0440b528644b2, type: 3}
-    Protein: 12
-    Carbs: 290
-    Etc: 0
-    Calories: 20
     Vitamins: 0
     Minerals: 0
     foodType: "gem\xFCse"
@@ -1127,17 +1039,6 @@ MonoBehaviour:
     Minerals: 0
     foodType: obst
     points: 5
-  - cardName: Weintraube
-    value: 9
-    cardImage: {fileID: 21300000, guid: cf942eae87545c642b5785203df67885, type: 3}
-    Protein: 7
-    Carbs: 150
-    Etc: 0
-    Calories: 70
-    Vitamins: 0
-    Minerals: 0
-    foodType: obst
-    points: 5
   - cardName: Milch
     value: 10
     cardImage: {fileID: 21300000, guid: 98172022a1e752944b469fcef20172a2, type: 3}
@@ -1148,28 +1049,6 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: dairy
-    points: 3
-  - cardName: Milch
-    value: 10
-    cardImage: {fileID: 21300000, guid: 98172022a1e752944b469fcef20172a2, type: 3}
-    Protein: 34
-    Carbs: 47
-    Etc: 0
-    Calories: 65
-    Vitamins: 0
-    Minerals: 0
-    foodType: dairy
-    points: 3
-  - cardName: Rindfleisch
-    value: 11
-    cardImage: {fileID: 21300000, guid: 577276be6e7247e4daa0ee3101683bba, type: 3}
-    Protein: 190
-    Carbs: 0
-    Etc: 0
-    Calories: 150
-    Vitamins: 0
-    Minerals: 0
-    foodType: fleisch
     points: 3
   - cardName: Rindfleisch
     value: 11
@@ -1193,28 +1072,6 @@ MonoBehaviour:
     Minerals: 0
     foodType: fisch
     points: 3
-  - cardName: Lachs
-    value: 12
-    cardImage: {fileID: 21300000, guid: 578e1f5b51f6b844183285838e301d39, type: 3}
-    Protein: 200
-    Carbs: 0
-    Etc: 0
-    Calories: 180
-    Vitamins: 0
-    Minerals: 0
-    foodType: fisch
-    points: 3
-  - cardName: Mozerella
-    value: 13
-    cardImage: {fileID: 21300000, guid: 90ee564f9970d7846b19274dcca84f30, type: 3}
-    Protein: 188
-    Carbs: 19
-    Etc: 0
-    Calories: 290
-    Vitamins: 0
-    Minerals: 0
-    foodType: dairy
-    points: 3
   - cardName: Mozerella
     value: 13
     cardImage: {fileID: 21300000, guid: 90ee564f9970d7846b19274dcca84f30, type: 3}
@@ -1233,28 +1090,6 @@ MonoBehaviour:
     Carbs: 6
     Etc: 0
     Calories: 22
-    Vitamins: 0
-    Minerals: 0
-    foodType: "gem\xFCse"
-    points: 5
-  - cardName: Spinat
-    value: 14
-    cardImage: {fileID: 21300000, guid: 46c1a6c3094514340b55d01a374cde03, type: 3}
-    Protein: 28
-    Carbs: 6
-    Etc: 0
-    Calories: 22
-    Vitamins: 0
-    Minerals: 0
-    foodType: "gem\xFCse"
-    points: 5
-  - cardName: Zwiebel
-    value: 15
-    cardImage: {fileID: 21300000, guid: 096d6a8bb8b52604ebb6e7e9cf74387b, type: 3}
-    Protein: 12
-    Carbs: 50
-    Etc: 0
-    Calories: 28
     Vitamins: 0
     Minerals: 0
     foodType: "gem\xFCse"
@@ -1281,28 +1116,6 @@ MonoBehaviour:
     Minerals: 0
     foodType: obst
     points: 5
-  - cardName: Erdbeere
-    value: 16
-    cardImage: {fileID: 21300000, guid: e393951ccdde3204fac09274e6411fe6, type: 3}
-    Protein: 8
-    Carbs: 55
-    Etc: 0
-    Calories: 32
-    Vitamins: 0
-    Minerals: 0
-    foodType: obst
-    points: 5
-  - cardName: Dinkelnudeln
-    value: 17
-    cardImage: {fileID: 21300000, guid: fef55a9940ef2a2498ef7402ceb8dfa9, type: 3}
-    Protein: 11
-    Carbs: 55
-    Etc: 0
-    Calories: 321
-    Vitamins: 0
-    Minerals: 0
-    foodType: getreide
-    points: 4
   - cardName: Dinkelnudeln
     value: 17
     cardImage: {fileID: 21300000, guid: fef55a9940ef2a2498ef7402ceb8dfa9, type: 3}
