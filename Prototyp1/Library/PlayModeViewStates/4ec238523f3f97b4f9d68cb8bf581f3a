@@ -22,7 +22,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 477
-    width: 1172
+    width: 1171
     height: 514
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 1}
-  m_TargetSize: {x: 2532, y: 1170}
+  m_TargetSize: {x: 2960, y: 1440}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -56,11 +56,11 @@ MonoBehaviour:
     - UnityEditor.DeviceSimulation.ApplicationSettingsPlugin
     pluginStates:
     - '{}'
-    scale: 37
+    scale: 32
     fitToScreenEnabled: 1
     rotationDegree: 90
     highlightSafeAreaEnabled: 0
-    friendlyName: Apple iPhone 12
+    friendlyName: Samsung Galaxy Note9
     screenIndex: 0
     networkReachability: 1
     systemLanguage: 10
