@@ -8,7 +8,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     public enum Food { Good, Bad }
     public Food typeOfFood;
-
+private bool wasZoomedBeforeInput = false;
     public bool isDragging;
     public Transform parenToReturnTo = null;
 
@@ -78,11 +78,14 @@ public static int totalPlayedCards = 0;
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        dragStartPos = eventData.position;
-        isDragging = false;
-    }
+  public void OnPointerDown(PointerEventData eventData)
+{
+    dragStartPos = eventData.position;
+    isDragging = false;
+
+    // Wenn die Karte schon gezoomt war, merke dir diesen Zustand
+    wasZoomedBeforeInput = isZoomed;
+}
 
 public void OnPointerUp(PointerEventData eventData)
 {
@@ -91,7 +94,8 @@ public void OnPointerUp(PointerEventData eventData)
         // Überprüfe, ob die Karte sich im "Hand"-Panel befindet
         if (transform.parent != null && transform.parent.name == "Hand")
         {
-            if (!isZoomed)
+            // Nur wenn sie noch nicht gezoomt ist und nicht durch den InputHandler entzoomt wurde
+            if (!isZoomed && !wasZoomedBeforeInput)
             {
                 ZoomIn();
             }
