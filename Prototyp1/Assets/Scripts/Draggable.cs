@@ -3,9 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
+
+public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler    
 {
+
+public GameObject happyImage;
+public GameObject sadImage;
+
     public enum Food { Good, Bad }
     public Food typeOfFood;
 private bool wasZoomedBeforeInput = false;
@@ -243,9 +249,11 @@ public void Play()
         }
     }
 
+    // Kombos basierend auf den Kartenarten
     if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
     if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
-    if ((meatCount >= 1 || fishCount >= 1) && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+    if (meatCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f); // Fleisch-Kombo
+    if (fishCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f); // Fisch-Kombo
     if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
 
     roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
@@ -265,7 +273,6 @@ public void Play()
         endscreenManager.CheckGameOver();
     }
 }
-
     public void NewDraw(DeckManager deckManager)
     {
         if (newDrawCharge > 0)

@@ -294,6 +294,7 @@
 "Assets/Scripts/DropZone.cs"
 "Assets/Scripts/EndScreenManager.cs"
 "Assets/Scripts/Hand.cs"
+"Assets/Scripts/InputHandler.cs"
 "Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/ScoreManager.cs"
 "Assets/Scripts/Sound.cs"

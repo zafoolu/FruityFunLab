@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - DropZone
     - EndscreenManager
     - Hand
+    - InputHandler
     - MainMenu
     - ScoreManager
     Unity.Rider.Editor.dll:
@@ -32,6 +33,7 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.AspectRatioFitter
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.GridLayoutGroup
@@ -115,13 +117,10 @@ ScriptsOnlyBuild:
     methodName: HandleDeckClick
   - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
-    methodName: LoadNextLevel
-  - assembly: Assembly-CSharp
-    fullTypeName: EndscreenManager
-    methodName: TryAgain
-  - assembly: Assembly-CSharp
-    fullTypeName: EndscreenManager
     methodName: GoBack
+  - assembly: Assembly-CSharp
+    fullTypeName: Draggable
+    methodName: BuyDiscard
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: Play
@@ -130,25 +129,25 @@ ScriptsOnlyBuild:
     methodName: NewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: Discard
+    methodName: BuyNewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: BuyDiscard
+    methodName: Discard
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: TryAgain
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: LoadNextLevel
   - assembly: Assembly-CSharp
     fullTypeName: DeckManager
     methodName: HandleDeckClick
   - assembly: Assembly-CSharp
-    fullTypeName: Draggable
-    methodName: BuyNewDraw
-  - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
     methodName: GoBack
   - assembly: Assembly-CSharp
-    fullTypeName: EndscreenManager
-    methodName: TryAgain
-  - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: BuyNewDraw
+    methodName: BuyDiscard
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: Play
@@ -157,10 +156,13 @@ ScriptsOnlyBuild:
     methodName: NewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
-    methodName: BuyDiscard
+    methodName: BuyNewDraw
   - assembly: Assembly-CSharp
     fullTypeName: Draggable
     methodName: Discard
+  - assembly: Assembly-CSharp
+    fullTypeName: EndscreenManager
+    methodName: TryAgain
   - assembly: Assembly-CSharp
     fullTypeName: EndscreenManager
     methodName: LoadNextLevel
@@ -207,15 +209,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4860}
     - Class: 114
-      Script: {instanceID: 5604}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 6076}
     - Class: 114
-      Script: {instanceID: 6578}
+      Script: {instanceID: 6580}
     - Class: 114
-      Script: {instanceID: 6786}
+      Script: {instanceID: 6788}
     - Class: 114
-      Script: {instanceID: 7120}
+      Script: {instanceID: 7122}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -284,15 +286,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5200}
+      Script: {instanceID: 5056}
     - Class: 114
-      Script: {instanceID: 5604}
+      Script: {instanceID: 5202}
     - Class: 114
-      Script: {instanceID: 5756}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 5758}
     - Class: 114
-      Script: {instanceID: 6786}
+      Script: {instanceID: 6076}
+    - Class: 114
+      Script: {instanceID: 6788}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -361,15 +365,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5200}
+      Script: {instanceID: 5056}
     - Class: 114
-      Script: {instanceID: 5604}
+      Script: {instanceID: 5202}
     - Class: 114
-      Script: {instanceID: 5756}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 5698}
     - Class: 114
-      Script: {instanceID: 6786}
+      Script: {instanceID: 5758}
+    - Class: 114
+      Script: {instanceID: 6076}
+    - Class: 114
+      Script: {instanceID: 6788}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -438,15 +446,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5200}
+      Script: {instanceID: 5056}
     - Class: 114
-      Script: {instanceID: 5604}
+      Script: {instanceID: 5202}
     - Class: 114
-      Script: {instanceID: 5756}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 5698}
     - Class: 114
-      Script: {instanceID: 6786}
+      Script: {instanceID: 5758}
+    - Class: 114
+      Script: {instanceID: 6076}
+    - Class: 114
+      Script: {instanceID: 6788}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -511,11 +523,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5052}
     - Class: 114
-      Script: {instanceID: 5604}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 6076}
     - Class: 114
-      Script: {instanceID: 6786}
+      Script: {instanceID: 6788}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1205,6 +1217,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_FontAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 989c31cd045aa4d52edc4b6aa1dbdf6c
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: InputHandler
   - hash:
       serializedVersion: 2
       Hash: 0dd14e314956b0d0d83ffcffe60aa46f

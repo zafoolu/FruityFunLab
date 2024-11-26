@@ -42,6 +42,7 @@ extern void Draggable_NewDraw_m9C731EB1846A72B0E2AFD36D54C4C2F89BDFA255 (void);
 extern void Draggable_Discard_mB99E3DEF6A4A58E796238E16908D82A52AA3093F (void);
 extern void Draggable_BuyDiscard_mEAD7341EDF265EEC740B17E62CFF6D509D9DDFB0 (void);
 extern void Draggable_BuyNewDraw_m5CFA1BDB873B6F20EDF09346E15DF161B0AB0314 (void);
+extern void Draggable_ResetZoomedCard_m41FC94B2940FEC0ABE1BA85E456B8A8E769D5106 (void);
 extern void Draggable__ctor_m26C671B6AAE39AAEF5DB0391B23F84A9C598E764 (void);
 extern void Draggable__cctor_m47D0A2B4AAA6C0FEBE1025A80FE178E13AB26A99 (void);
 extern void DropZone_Update_m18A45AC73DD57E5738D9F19D306E95ADBBCF5A8D (void);
@@ -70,6 +71,8 @@ extern void Hand_OnPointerEnter_mB27143AEA1F1D2ABD43837836C181DC3AAA38E41 (void)
 extern void Hand_OnPointerExit_mAA5AA3AC1E69266992B22BFA16664DFB752A8B43 (void);
 extern void Hand_OnDrop_m585F14330FB0190F99A90F34768EF9FA2A7684B6 (void);
 extern void Hand__ctor_m98922058C1A056306D560A36EAEDCE0247110FA8 (void);
+extern void InputHandler_Update_mA84668111B5BA4BA9C57625FD4FC6A26EC7D2FD9 (void);
+extern void InputHandler__ctor_m6F970BFB5070CD4229F65C8544F51C4B5994654B (void);
 extern void MainMenu_PlayGame_mEC2DA4274CDD4D658AE27480E2C70C6049A496B5 (void);
 extern void MainMenu_QuitGame_mBF761274C14BD7341FE8C32A538D28343B63EDC4 (void);
 extern void MainMenu_LoadLibrary_m18F56581A048C10EF5A3E79EDC047CEB7D04DDDA (void);
@@ -344,7 +347,7 @@ extern void U3CWarpTextU3Ed__8_MoveNext_mCE7A826C5E4854C2C509C77BD18F5A9B6D691B0
 extern void U3CWarpTextU3Ed__8_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mD80368E9B7E259311C03E406B75161ED6F7618E3 (void);
 extern void U3CWarpTextU3Ed__8_System_Collections_IEnumerator_Reset_m07746C332D2D8CE5DEA59873C26F2FAD4B369B42 (void);
 extern void U3CWarpTextU3Ed__8_System_Collections_IEnumerator_get_Current_m71D7F84D9DEF63BEC6B44866515DDCF35B142A19 (void);
-static Il2CppMethodPointer s_methodPointers[332] = 
+static Il2CppMethodPointer s_methodPointers[335] = 
 {
 	AudioManager_Awake_m8138BCED4D692C83C95626A1A09AB46EA5205569,
 	AudioManager_Play_mB69D5512DD0ECB0B853CD681D2282DC78844DE4F,
@@ -376,6 +379,7 @@ static Il2CppMethodPointer s_methodPointers[332] =
 	Draggable_Discard_mB99E3DEF6A4A58E796238E16908D82A52AA3093F,
 	Draggable_BuyDiscard_mEAD7341EDF265EEC740B17E62CFF6D509D9DDFB0,
 	Draggable_BuyNewDraw_m5CFA1BDB873B6F20EDF09346E15DF161B0AB0314,
+	Draggable_ResetZoomedCard_m41FC94B2940FEC0ABE1BA85E456B8A8E769D5106,
 	Draggable__ctor_m26C671B6AAE39AAEF5DB0391B23F84A9C598E764,
 	Draggable__cctor_m47D0A2B4AAA6C0FEBE1025A80FE178E13AB26A99,
 	DropZone_Update_m18A45AC73DD57E5738D9F19D306E95ADBBCF5A8D,
@@ -404,6 +408,8 @@ static Il2CppMethodPointer s_methodPointers[332] =
 	Hand_OnPointerExit_mAA5AA3AC1E69266992B22BFA16664DFB752A8B43,
 	Hand_OnDrop_m585F14330FB0190F99A90F34768EF9FA2A7684B6,
 	Hand__ctor_m98922058C1A056306D560A36EAEDCE0247110FA8,
+	InputHandler_Update_mA84668111B5BA4BA9C57625FD4FC6A26EC7D2FD9,
+	InputHandler__ctor_m6F970BFB5070CD4229F65C8544F51C4B5994654B,
 	MainMenu_PlayGame_mEC2DA4274CDD4D658AE27480E2C70C6049A496B5,
 	MainMenu_QuitGame_mBF761274C14BD7341FE8C32A538D28343B63EDC4,
 	MainMenu_LoadLibrary_m18F56581A048C10EF5A3E79EDC047CEB7D04DDDA,
@@ -679,7 +685,7 @@ static Il2CppMethodPointer s_methodPointers[332] =
 	U3CWarpTextU3Ed__8_System_Collections_IEnumerator_Reset_m07746C332D2D8CE5DEA59873C26F2FAD4B369B42,
 	U3CWarpTextU3Ed__8_System_Collections_IEnumerator_get_Current_m71D7F84D9DEF63BEC6B44866515DDCF35B142A19,
 };
-static const int32_t s_InvokerIndices[332] = 
+static const int32_t s_InvokerIndices[335] = 
 {
 	4475,
 	3607,
@@ -711,6 +717,7 @@ static const int32_t s_InvokerIndices[332] =
 	3607,
 	4475,
 	4475,
+	6441,
 	4475,
 	6441,
 	4475,
@@ -738,6 +745,8 @@ static const int32_t s_InvokerIndices[332] =
 	3607,
 	3607,
 	3607,
+	4475,
+	4475,
 	4475,
 	4475,
 	4475,
@@ -1018,7 +1027,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	332,
+	335,
 	s_methodPointers,
 	0,
 	NULL,
