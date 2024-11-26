@@ -352,4 +352,11 @@ public void Discard(DeckManager deckManager)
             }
         }
     }
+    public static void ResetZoomedCard()
+{
+    if (currentlyZoomedCard != null)
+    {
+        currentlyZoomedCard.ZoomOut();
+    }
+}
 }
