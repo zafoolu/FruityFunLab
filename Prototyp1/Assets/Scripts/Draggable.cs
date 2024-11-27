@@ -89,7 +89,7 @@ public static int totalPlayedCards = 0;
     dragStartPos = eventData.position;
     isDragging = false;
 
-    // Wenn die Karte schon gezoomt war, merke dir diesen Zustand
+    
     wasZoomedBeforeInput = isZoomed;
 }
 
@@ -97,10 +97,10 @@ public void OnPointerUp(PointerEventData eventData)
 {
     if (!isDragging)
     {
-        // Überprüfe, ob die Karte sich im "Hand"-Panel befindet
+        
         if (transform.parent != null && transform.parent.name == "Hand")
         {
-            // Nur wenn sie noch nicht gezoomt ist und nicht durch den InputHandler entzoomt wurde
+        
             if (!isZoomed && !wasZoomedBeforeInput)
             {
                 ZoomIn();
@@ -114,30 +114,30 @@ public void OnPointerUp(PointerEventData eventData)
 }
    public void OnBeginDrag(PointerEventData eventData)
 {
-    // Wenn eine andere Karte gezoomt ist, entferne deren Zoom
+    
     if (currentlyZoomedCard != null && currentlyZoomedCard != this)
     {
         currentlyZoomedCard.ZoomOut();
     }
 
-    // Prüfen, ob diese Karte gezoomt ist, und den Zoom beenden
+    
     if (isZoomed)
     {
         ZoomOut();
     }
 
-    // Beginne den Drag-Vorgang
+    
     float distance = Vector2.Distance(dragStartPos, eventData.position);
     if (distance > dragThreshold)
     {
         isDragging = true;
         FindObjectOfType<AudioManager>().Play("draw_sound");
 
-        // Setze das Parent für das Ziehen (z. B. an das Canvas übergeben)
+        
         parenToReturnTo = this.transform.parent;
         this.transform.SetParent(this.transform.parent.parent);
 
-        // Blockiere Raycasts während des Ziehens
+        
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 }
@@ -207,7 +207,7 @@ private void ZoomOut()
 
 public void Play()
 {
-    // Bereinige das Spielfeld
+
     GameObject playedCardsPanel = GameObject.Find("Arena");
 
     foreach (Transform child in playedCardsPanel.transform)
@@ -309,7 +309,7 @@ public void Play()
 
 public void Discard(DeckManager deckManager)
 {
-    if (discardCharge > 0) // Überprüfen, ob discardCharge größer als 0 ist
+    if (discardCharge > 0) 
     {
         if (currentlyZoomedCard != null)
         {

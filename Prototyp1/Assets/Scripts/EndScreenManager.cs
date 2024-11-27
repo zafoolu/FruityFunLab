@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class EndscreenManager : MonoBehaviour
 {
-    // Dein Endscreen Panel
+    
     public GameObject endscreenPanel;
 
-    // Game Over Panel
+    
     public GameObject gameOverPanel;
 
-    // Textfelder für die Gesamtwerte
+    
     public TextMeshProUGUI totalProteinText;
     public TextMeshProUGUI totalCarbsText;
     public TextMeshProUGUI totalEtcText;
@@ -20,22 +20,22 @@ public class EndscreenManager : MonoBehaviour
     public TextMeshProUGUI totalPointsText;
     public TextMeshProUGUI moneyText;
 
-    // Referenz zum Hand-Panel (zum Zählen der Karten)
+    
     public GameObject handPanel;
 
-    // Neue Variablen für maximale Punktzahlen auf jedem Level
+    
     public int maxPointsLevel1 = 60;
     public int maxPointsLevel2 = 70;
     public int maxPointsLevel3 = 80;
 
-    // Referenz zum DeckManager Skript
+    
     public DeckManager deckManager;
 
     private bool isGameOver = false;
 
     void Awake()
     {
-        // Alle Gesamtwerte zurücksetzen
+        
         Draggable.totalProtein = 0;
         Draggable.totalCarbs = 0;
         Draggable.totalEtc = 0;
@@ -44,7 +44,7 @@ public class EndscreenManager : MonoBehaviour
         Draggable.totalMinerals = 0;
         Draggable.totalPoints = 0;
 
-        // Endscreen Panel und Game Over Panel ausblenden
+        
         endscreenPanel.SetActive(false);
         gameOverPanel.SetActive(false);
 
@@ -65,17 +65,17 @@ public class EndscreenManager : MonoBehaviour
     {
         moneyText.text = $"{Draggable.money}";
 
-        // Setze die maximalen Punktzahlen für das aktuelle Level
+        
         int levelTargetPoints = GetLevelTargetPoints(SceneManager.GetActiveScene().name);
 
-        // Wenn die Gesamtpunkte erreicht wurden, zeige den Endscreen an
+        
         if (!isGameOver && Draggable.totalPoints >= levelTargetPoints)
         {
             ShowEndscreen();
         }
     }
 
-    // Methode zur Rückgabe des Zielwerts für Punkte pro Level
+    
     int GetLevelTargetPoints(string sceneName)
     {
         switch (sceneName)
@@ -91,15 +91,15 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
-    // Methode zur Überprüfung, ob das Game Over erreicht wurde
+    
     public void CheckGameOver()
     {
         int levelTargetPoints = GetLevelTargetPoints(SceneManager.GetActiveScene().name);
 
-        // Überprüfe, ob die Anzahl der Karten im Hand-Panel 0 ist, der ClickCount 9 ist und die Punktzahl nicht passt
-        bool isHandEmpty = handPanel.transform.childCount == 0;  // Überprüfen, ob keine Karten mehr im Hand-Panel sind
-        bool isClickCountNine = deckManager.clickCount == 9; // Überprüfen, ob der Click Count 9 ist
-        bool isScoreNotMatching = Draggable.totalPoints < levelTargetPoints;  // Überprüfen, ob die Punktzahl nicht ausreicht
+    
+        bool isHandEmpty = handPanel.transform.childCount == 0;  
+        bool isClickCountNine = deckManager.clickCount == 9; 
+        bool isScoreNotMatching = Draggable.totalPoints < levelTargetPoints;  
 
         if (isHandEmpty && isClickCountNine && isScoreNotMatching)
         {
@@ -107,24 +107,21 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
-    // Game Over anzeigen
+    
     public void ShowGameOver()
     {
         isGameOver = true;
-
-        // Game Over Panel anzeigen
         gameOverPanel.SetActive(true);
 
         Debug.Log("Game Over wurde angezeigt.");
     }
 
-    // Endscreen anzeigen
     public void ShowEndscreen()
     {
-        Draggable.money += 6; // Bonus bei Levelabschluss
+        Draggable.money += 6; 
         isGameOver = true;
 
-        // Textfelder für die Gesamtwerte und Punkte anzeigen
+        
         UpdateTextWithColor(totalProteinText, "TOTAL PROTEIN", Draggable.totalProtein / 10f, 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
@@ -147,10 +144,10 @@ public class EndscreenManager : MonoBehaviour
         endscreenPanel.SetActive(true); // Endscreen Panel anzeigen
     }
 
-    // Text-Update für Protein, Carbs etc.
+    
     void UpdateTextWithColor(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
-        text.text = $"{prefix}: {value}"; // Zeige den Wert mit Prefix
+        text.text = $"{prefix}: {value}"; 
         for (int i = 0; i < thresholds.Length; i++)
         {
             if (value >= thresholds[i])
@@ -160,7 +157,7 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
-    // Gleiches für Calories, Vitamins und Minerals (mit anderen Schwellenwerten)
+    
     void UpdateTextWithColorForCalories(TextMeshProUGUI text, string prefix, float value, int[] thresholds, Color[] colors)
     {
         UpdateTextWithColor(text, prefix, value, thresholds, colors);
@@ -176,7 +173,7 @@ public class EndscreenManager : MonoBehaviour
         UpdateTextWithColor(text, prefix, value, thresholds, colors);
     }
 
-    // Methode zum Laden der nächsten Szene
+    
     public void LoadNextLevel()
     {
         if (endscreenPanel != null)
@@ -201,7 +198,7 @@ public class EndscreenManager : MonoBehaviour
         }
     }
 
-    // Methode, die nach dem Laden einer neuen Szene aufgerufen wird
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (endscreenPanel != null)
