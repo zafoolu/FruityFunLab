@@ -9,8 +9,10 @@ using System.Collections.Generic;
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler    
 {
 
-public GameObject happyImage;
-public GameObject sadImage;
+public GameObject currentReaction;
+public GameObject sadReaction;
+public GameObject happyReaction;
+public GameObject neutralReaction;
 
     public enum Food { Good, Bad }
     public Food typeOfFood;
@@ -69,6 +71,7 @@ public static int totalPlayedCards = 0;
         rectTransform = GetComponent<RectTransform>();
         parentCanvas = GetComponentInParent<Canvas>();
         originalScale = this.transform.localScale;
+        currentReaction = neutralReaction;
     }
 
     void Update()
@@ -207,24 +210,14 @@ private void ZoomOut()
 
 public void Play()
 {
-    // Finde den PersonaManager zur Laufzeit
     PersonaManager personaManager = FindObjectOfType<PersonaManager>();
 
-    // Überprüfen, ob der PersonaManager und die aktuelle Persona existieren
     if (personaManager != null && personaManager.currentPersona != null)
     {
-        // Debugge den Level der aktuellen Persona
-        Debug.Log($"Aktuelle Persona Level: {personaManager.currentPersona.level}");
-
-        // Debugge die Dislikes der aktuellen Persona
-        if (personaManager.currentPersona.Dislikes != null && personaManager.currentPersona.Dislikes.Count > 0)
-        {
-            Debug.Log($"Aktuelle Persona Dislikes: {string.Join(", ", personaManager.currentPersona.Dislikes)}");
-        }
-        else
-        {
-            Debug.Log("Die aktuelle Persona hat keine Dislikes.");
-        }
+        // Die Reaktion standardmäßig auf neutral setzen
+        neutralReaction.SetActive(true);
+        happyReaction.SetActive(false);
+        sadReaction.SetActive(false);
     }
     else
     {
@@ -240,11 +233,9 @@ public void Play()
 
     if (playedCardsPanel.transform.childCount == 0) return;
 
-    int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0;
+    int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0, dairyCount = 0;
     int roundPoints = 0;
     float comboMultiplier = 1f;
-
-    // Initialer Zustand: Überprüfen, ob eine der Karten in den Dislikes der Persona ist
     bool containsDislikedFood = false;
 
     FindObjectOfType<AudioManager>().Play("play_sound");
@@ -264,11 +255,12 @@ public void Play()
         totalMinerals += card.Minerals;
         totalVitamins += card.Vitamins;
 
-        // Überprüfen, ob das ausgelegte Essen im "Dislikes"-Array der Persona ist
         if (personaManager.currentPersona.Dislikes.Contains(card.foodType.ToLower()))
         {
-            Debug.Log($"Die aktuelle Persona mag {card.foodType} nicht!");
-            containsDislikedFood = true;  // Markiere, dass ein nicht gemocht Lebensmittel ausgelegt wurde
+            containsDislikedFood = true;
+            sadReaction.SetActive(true);
+            neutralReaction.SetActive(false);
+            happyReaction.SetActive(false);
         }
 
         switch (card.foodType.ToLower())
@@ -279,28 +271,44 @@ public void Play()
             case "fleisch": meatCount++; break;
             case "getreide": grainCount++; break;
             case "fisch": fishCount++; break;
+            case "milchprodukt": dairyCount++; break;
         }
     }
 
-    // Wenn ein nicht gemocht Lebensmittel dabei ist, setze den Combo-Multiplier auf 1
     if (containsDislikedFood)
     {
-        comboMultiplier = 1f;  // Kein Multiplier, wenn ein disliked Essen gespielt wurde
+        comboMultiplier = 1f;
     }
     else
     {
-        // Kombos basierend auf den Kartenarten
         if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
         if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
-        if (meatCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f); // Fleisch-Kombo
-        if (fishCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f); // Fisch-Kombo
+        if (meatCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+        if (fishCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
         if (grainCount >= 1 && (meatCount >= 1 || fishCount >= 1 || vegetableCount >= 1)) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
+        if (meatCount >= 1 && dairyCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 1.5f);
+        if (vegetableCount >= 1 && dairyCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+    }
+
+    if (!containsDislikedFood)
+    {
+        if (comboMultiplier > 1f)
+        {
+            happyReaction.SetActive(true);
+            neutralReaction.SetActive(false);
+            sadReaction.SetActive(false);
+        }
+        else
+        {
+            neutralReaction.SetActive(true);
+            happyReaction.SetActive(false);
+            sadReaction.SetActive(false);
+        }
     }
 
     roundPoints = Mathf.CeilToInt(roundPoints * comboMultiplier);
     totalPoints += roundPoints;
 
-    // Aktualisiere die Slider
     if (proteinSlider != null) proteinSlider.value = totalProtein;
     if (carbsSlider != null) carbsSlider.value = totalCarbs;
     if (etcSlider != null) etcSlider.value = totalEtc;
@@ -308,7 +316,6 @@ public void Play()
     if (vitaminsSlider != null) vitaminsSlider.value = totalVitamins;
     if (mineralsSlider != null) mineralsSlider.value = totalMinerals;
 
-    // Am Ende des Plays: Überprüfe, ob das Spiel zu Ende ist
     if (endscreenManager != null)
     {
         endscreenManager.CheckGameOver();
