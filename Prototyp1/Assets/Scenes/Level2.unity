@@ -1726,6 +1726,7 @@ GameObject:
   - component: {fileID: 672013949}
   - component: {fileID: 672013950}
   - component: {fileID: 672013951}
+  - component: {fileID: 672013952}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1836,6 +1837,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521b4638f27093c439bfa263341bfe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialScreen: {fileID: 0}
+--- !u!114 &672013952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672013946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdd4601112b6df4aaa120aa6624c3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personas:
+  - level: 1
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes: []
+    maxScore: 0
+  - level: 2
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes:
+    - fisch
+    maxScore: 0
+  - level: 3
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes:
+    - fisch
+    - fleisch
+    - dairy
+    maxScore: 0
+  currentPersona:
+    level: 0
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes: []
+    maxScore: 0
 --- !u!1 &672297103
 GameObject:
   m_ObjectHideFlags: 0
@@ -3664,7 +3708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 87, y: 42.3}
+  m_AnchoredPosition: {x: 87, y: 42.30005}
   m_SizeDelta: {x: 1617.9624, y: 330}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1097419315

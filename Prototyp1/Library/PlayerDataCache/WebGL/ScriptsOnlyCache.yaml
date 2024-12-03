@@ -34,6 +34,7 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.AspectRatioFitter
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.GridLayoutGroup
@@ -75,6 +76,7 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventTrigger/Entry
     - UnityEngine.EventSystems.EventTrigger/TriggerEvent
     - UnityEngine.UI.AnimationTriggers
+    - UnityEngine.UI.Button/ButtonClickedEvent
     - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
@@ -273,6 +275,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2748}
     - Class: 114
       Script: {instanceID: 2816}
+    - Class: 114
+      Script: {instanceID: 3106}
     - Class: 114
       Script: {instanceID: 3352}
     - Class: 114
@@ -1219,7 +1223,7 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
-      Hash: 989c31cd045aa4d52edc4b6aa1dbdf6c
+      Hash: b8a64f0af9f01d7982d29b57f26938a3
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: InputHandler
@@ -1237,7 +1241,7 @@ ScriptsOnlyBuild:
     className: UnityOnBecameInvisibleMessageListener
   - hash:
       serializedVersion: 2
-      Hash: e316032a53b6baba589d4e1d87f4e402
+      Hash: 8f51f2273419eb37355c64a9f4129948
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Draggable
@@ -1638,4 +1642,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Level2.unity
   - Assets/Scenes/Level3.unity
   - Assets/Scenes/CardCollection.unity
-  playerPath: C:/Users/solog/Desktop/Prototyp
+  playerPath: C:/Users/solog/Desktop/Core_Playable

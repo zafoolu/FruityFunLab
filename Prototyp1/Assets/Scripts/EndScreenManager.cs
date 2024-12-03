@@ -33,6 +33,8 @@ public class EndscreenManager : MonoBehaviour
 
     private bool isGameOver = false;
 
+    
+
     void Awake()
     {
         

@@ -341,6 +341,7 @@
 "Assets/Scripts/Hand.cs"
 "Assets/Scripts/InputHandler.cs"
 "Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/PersonaManager.cs"
 "Assets/Scripts/ScoreManager.cs"
 "Assets/Scripts/Sound.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

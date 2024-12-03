@@ -1932,6 +1932,7 @@ GameObject:
   - component: {fileID: 672013949}
   - component: {fileID: 672013950}
   - component: {fileID: 672013951}
+  - component: {fileID: 672013952}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2043,6 +2044,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialScreen: {fileID: 1687250891}
+--- !u!114 &672013952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672013946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdd4601112b6df4aaa120aa6624c3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personas:
+  - level: 1
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes: []
+  - level: 2
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes:
+    - fisch
+  - level: 3
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes:
+    - fisch
+    - fleisch
+    - dairy
 --- !u!1 &672297103
 GameObject:
   m_ObjectHideFlags: 0
