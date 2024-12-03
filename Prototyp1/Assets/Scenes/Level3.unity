@@ -800,14 +800,14 @@ RectTransform:
   m_GameObject: {fileID: 254351695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.32, y: 1.32, z: 1.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 315727185}
+  m_Father: {fileID: 1434613399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -2.86, y: -213.96002}
+  m_AnchoredPosition: {x: 3.71, y: -256.45}
   m_SizeDelta: {x: 299.85522, y: 427.92004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &254351697
@@ -892,9 +892,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.32, y: 1.32, z: 1.32}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1739549724}
-  - {fileID: 254351696}
+  m_Children: []
   m_Father: {fileID: 1434613399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -1591,6 +1589,7 @@ GameObject:
   - component: {fileID: 672013949}
   - component: {fileID: 672013950}
   - component: {fileID: 672013951}
+  - component: {fileID: 672013952}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1610,6 +1609,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65884ac4fed98942a02297047f595f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentReaction: {fileID: 0}
+  sadReaction: {fileID: 254351695}
+  happyReaction: {fileID: 1739549723}
+  neutralReaction: {fileID: 315727184}
   typeOfFood: 0
   isDragging: 0
   parenToReturnTo: {fileID: 0}
@@ -1699,6 +1702,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521b4638f27093c439bfa263341bfe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialScreen: {fileID: 0}
+--- !u!114 &672013952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672013946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdd4601112b6df4aaa120aa6624c3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personas:
+  - level: 1
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes: []
+    maxScore: 0
+  - level: 2
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes:
+    - fisch
+    maxScore: 0
+  - level: 3
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes:
+    - fisch
+    - fleisch
+    - milchprodukt
+    maxScore: 0
+  currentPersona:
+    level: 0
+    pProtein: 0
+    pCarbs: 0
+    pCalories: 0
+    Dislikes: []
+    maxScore: 0
 --- !u!1 &672297103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,6 +2912,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65884ac4fed98942a02297047f595f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentReaction: {fileID: 0}
+  sadReaction: {fileID: 0}
+  happyReaction: {fileID: 0}
+  neutralReaction: {fileID: 0}
   typeOfFood: 0
   isDragging: 0
   parenToReturnTo: {fileID: 0}
@@ -4783,7 +4833,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 940265446}
+  - {fileID: 1739549724}
   - {fileID: 315727185}
+  - {fileID: 254351696}
   - {fileID: 5850643}
   - {fileID: 1251662670}
   - {fileID: 92231428}
@@ -6711,14 +6763,14 @@ RectTransform:
   m_GameObject: {fileID: 1739549723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.32, y: 1.32, z: 1.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 315727185}
+  m_Father: {fileID: 1434613399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -213.96002}
+  m_AnchoredPosition: {x: 12, y: -258}
   m_SizeDelta: {x: 299.85522, y: 427.92004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1739549725
@@ -6963,7 +7015,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: "\xF6l/fett"
-    points: 2
+    points: 3
   - cardName: Butter
     value: 3
     cardImage: {fileID: 21300000, guid: d1fd8395ef6ce0f478a70cce77fa3688, type: 3}
@@ -6974,7 +7026,7 @@ MonoBehaviour:
     Vitamins: 0
     Minerals: 0
     foodType: "\xF6l/fett"
-    points: 2
+    points: 3
   - cardName: Ente
     value: 4
     cardImage: {fileID: 21300000, guid: 67ba042ef18d59f4b9cb9cef3b3c98ce, type: 3}
@@ -7116,7 +7168,7 @@ MonoBehaviour:
     Calories: 65
     Vitamins: 0
     Minerals: 0
-    foodType: dairy
+    foodType: milchprodukt
     points: 3
   - cardName: Milch
     value: 10
@@ -7127,7 +7179,7 @@ MonoBehaviour:
     Calories: 65
     Vitamins: 0
     Minerals: 0
-    foodType: dairy
+    foodType: milchprodukt
     points: 3
   - cardName: Rindfleisch
     value: 11
@@ -7182,7 +7234,7 @@ MonoBehaviour:
     Calories: 290
     Vitamins: 0
     Minerals: 0
-    foodType: dairy
+    foodType: milchprodukt
     points: 3
   - cardName: Mozerella
     value: 13
@@ -7193,7 +7245,7 @@ MonoBehaviour:
     Calories: 290
     Vitamins: 0
     Minerals: 0
-    foodType: dairy
+    foodType: milchprodukt
     points: 3
   - cardName: Spinat
     value: 14

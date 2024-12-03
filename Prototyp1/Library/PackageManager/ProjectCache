@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638670874422573408
-    m_Hash: 688468109
+      ticks: 638687812505543467
+    m_Hash: 3591764557
   m_LockFileStatus:
     m_FilePath: C:/Users/solog/Documents/GitHub/FruityFunLab/Prototyp1/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638670874422582092
-    m_Hash: 540570245
+      ticks: 638687812517402976
+    m_Hash: 789840062
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -119,9 +119,11 @@ m_ResolvedPackages:
     - 2.4.4
     - 2.5.1
     - 2.5.2
+    - 2.6.0
     compatible:
     - 2.5.1
     - 2.5.2
+    - 2.6.0
     recommended: 2.5.2
     deprecated: []
   dependencies: []
