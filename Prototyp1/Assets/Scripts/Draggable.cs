@@ -9,6 +9,8 @@ using System.Collections.Generic;
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler    
 {
 
+public Animator obstsalatAnim;
+
 public GameObject currentReaction;
 public GameObject sadReaction;
 public GameObject happyReaction;
@@ -281,7 +283,11 @@ public void Play()
     }
     else
     {
-        if (fruitCount >= 2) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+        if (fruitCount >= 2)
+        {
+            comboMultiplier = Mathf.Max(comboMultiplier, 2f);
+        }
+
         if (vegetableCount >= 2 && oilFatCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 3f);
         if (meatCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
         if (fishCount >= 1 && vegetableCount >= 1) comboMultiplier = Mathf.Max(comboMultiplier, 2f);
@@ -321,6 +327,8 @@ public void Play()
         endscreenManager.CheckGameOver();
     }
 }
+
+
     public void NewDraw(DeckManager deckManager)
     {
         if (newDrawCharge > 0)
