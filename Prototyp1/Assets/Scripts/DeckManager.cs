@@ -97,14 +97,14 @@ public class DeckManager : MonoBehaviour
 public class Card
 {
     public string cardName;
-    public int value;
+    public float value;
     public Sprite cardImage;
-    public int Protein;
-    public int Carbs;
-    public int Etc;
-    public int Calories;
-    public int Vitamins;
-    public int Minerals;
+    public float Protein;
+    public float Carbs;
+    public float Etc;
+    public float Calories;
+    public float Vitamins;
+    public float Minerals;
     public string foodType;
-    public int points;
+    public float points;
 }

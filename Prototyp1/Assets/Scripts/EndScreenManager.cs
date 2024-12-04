@@ -85,13 +85,13 @@ public class EndscreenManager : MonoBehaviour
         switch (sceneName)
         {
             case "Level1":
-                return personaManager.currentPersona.maxScore; // Zielpunkte für Level 1
+                return personaManager.currentPersona.maxScore; 
             case "Level2":
-                return personaManager.currentPersona.maxScore; // Zielpunkte für Level 2
+                return personaManager.currentPersona.maxScore; 
             case "Level3":
-                return personaManager.currentPersona.maxScore;; // Zielpunkte für Level 3
+                return personaManager.currentPersona.maxScore;; 
             default:
-                return 60; // Standardwert
+                return 60; 
         }
     }
 
@@ -126,16 +126,16 @@ public class EndscreenManager : MonoBehaviour
         isGameOver = true;
 
         
-        UpdateTextWithColor(totalProteinText, "TOTAL PROTEIN", Draggable.totalProtein / 10f, 
+        UpdateTextWithColor(totalProteinText, "TOTAL PROTEIN", Draggable.totalProtein , 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColor(totalCarbsText, "TOTAL CARBS", Draggable.totalCarbs / 10f, 
-            new int[] { 0, 225, 325, 375, 475 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
+        UpdateTextWithColor(totalCarbsText, "TOTAL CARBS", Draggable.totalCarbs , 
+            new int[] { 0, 50, 75, 100, 125 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
         UpdateTextWithColor(totalCaloriesText, "TOTAL CALORIES", Draggable.totalCalories, 
-            new int[] { 0, 300, 700, 900, 1300 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
+            new int[] { 0, 500, 700, 900, 1300 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
-        UpdateTextWithColor(totalEtcText, "TOTAL ETC", Draggable.totalEtc / 10f, 
+        UpdateTextWithColor(totalEtcText, "TOTAL ETC", Draggable.totalEtc , 
             new int[] { 0, 15, 25, 35, 45 }, new Color[] { Color.red, Color.yellow, Color.green, Color.yellow, Color.red });
 
         UpdateTextWithColor(totalVitaminsText, "TOTAL VITAMINS", Draggable.totalVitamins, 
@@ -185,20 +185,20 @@ public class EndscreenManager : MonoBehaviour
             endscreenPanel.SetActive(false);
         }
 
-        // Aktuelle Szene abrufen
+        
         Scene currentScene = SceneManager.GetActiveScene();
         string currentSceneName = currentScene.name;
 
-        // Prüfen, ob die aktuelle Szene ein Level ist
+       
         if (currentSceneName.StartsWith("Level"))
         {
             int currentLevelNumber;
             if (int.TryParse(currentSceneName.Substring(5), out currentLevelNumber))
             {
-                // Nächsten Levelnamen berechnen
+                
                 string nextSceneName = "Level" + (currentLevelNumber + 1);
 
-                // Prüfen, ob die nächste Szene existiert
+                
                 if (SceneExists(nextSceneName))
                 {
                     SceneManager.LoadScene(nextSceneName);

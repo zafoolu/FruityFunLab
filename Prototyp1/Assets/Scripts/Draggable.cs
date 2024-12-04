@@ -34,22 +34,22 @@ public EndscreenManager endscreenManager;
     public Vector3 zoomedScale = new Vector3(2.5f, 2.5f, 2.5f);
     public Vector2 zoomedPosition = Vector2.zero;
 public static int totalPlayedCards = 0;
-    public int Protein;
-    public int Carbs;
-    public int Etc;
-    public int Calories;
-    public int Vitamins;
-    public int Minerals;
+    public float Protein;
+    public float Carbs;
+    public float Etc;
+    public float Calories;
+    public float Vitamins;
+    public float Minerals;
     public string foodType;
-    public int points;
+    public float points;
 
-    public static int totalProtein = 0;
-    public static int totalCarbs = 0;
-    public static int totalEtc = 0;
-    public static int totalCalories = 0;
-    public static int totalVitamins = 0;
-    public static int totalMinerals = 0;
-    public static int totalPoints = 0;
+    public static float totalProtein = 0;
+    public static float totalCarbs = 0;
+    public static float totalEtc = 0;
+    public static float totalCalories = 0;
+    public static float totalVitamins = 0;
+    public static float totalMinerals = 0;
+    public static float totalPoints = 0;
 
     public Slider proteinSlider;
     public Slider carbsSlider;
@@ -236,7 +236,7 @@ public void Play()
     if (playedCardsPanel.transform.childCount == 0) return;
 
     int fruitCount = 0, vegetableCount = 0, oilFatCount = 0, meatCount = 0, grainCount = 0, fishCount = 0, dairyCount = 0;
-    int roundPoints = 0;
+    float roundPoints = 0;
     float comboMultiplier = 1f;
     bool containsDislikedFood = false;
 
