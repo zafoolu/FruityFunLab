@@ -1693,6 +1693,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 1070697348}
   maxScore: {fileID: 1623427423}
+  proteinSlider: {fileID: 1656457543}
+  carbsSlider: {fileID: 855814898}
+  caloriesSlider: {fileID: 1565338745}
 --- !u!114 &672013951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1720,9 +1723,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personas:
   - level: 1
-    pProtein: 0
-    pCarbs: 0
-    pCalories: 0
+    pProtein: 30
+    pCarbs: 75
+    pCalories: 800
     Dislikes: []
     maxScore: 0
   - level: 2
@@ -1733,9 +1736,9 @@ MonoBehaviour:
     - fisch
     maxScore: 0
   - level: 3
-    pProtein: 0
-    pCarbs: 0
-    pCalories: 0
+    pProtein: 30
+    pCarbs: 75
+    pCalories: 800
     Dislikes:
     - fisch
     - fleisch
@@ -3579,7 +3582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 87, y: 42.3}
+  m_AnchoredPosition: {x: 87, y: 42.30005}
   m_SizeDelta: {x: 1617.9624, y: 330}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1097419315
@@ -7103,7 +7106,7 @@ MonoBehaviour:
     value: 1
     cardImage: {fileID: 21300000, guid: 68ba9d686222f2c4caba211420f8bb35, type: 3}
     Protein: 3
-    Carbs: 140
+    Carbs: 14
     Etc: 0
     Calories: 61
     Vitamins: 0
