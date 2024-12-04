@@ -1826,6 +1826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1070697348}
+  maxScore: {fileID: 1623427423}
 --- !u!114 &672013951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1864,7 +1865,7 @@ MonoBehaviour:
     pCalories: 0
     Dislikes:
     - fisch
-    maxScore: 0
+    maxScore: 70
   - level: 3
     pProtein: 0
     pCarbs: 0
@@ -6029,7 +6030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 70
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: baa3b7cb77fd2f84998a0af662983afa, type: 2}
   m_sharedMaterial: {fileID: 5378647958257815726, guid: baa3b7cb77fd2f84998a0af662983afa, type: 2}
@@ -7484,6 +7485,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 5803009262139425360, guid: b3c73e67438c44f44b332ec9e1a63774, type: 3}
   handPanel: {fileID: 1097419314}
   deckImage: {fileID: 1831941489}
+  maxCards: 8
   clickCount: 0
 --- !u!114 &1831941496
 MonoBehaviour:

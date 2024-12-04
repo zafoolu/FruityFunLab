@@ -9,7 +9,7 @@ public class DeckManager : MonoBehaviour
     public Transform handPanel;
     public GameObject deckImage;
     public static int cardsDrawn = 0; 
-private const int maxCards = 9;  
+    public int maxCards = 9;  
 
 
     public int clickCount = 0;

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CardCollection.unity
     guid: 9144a2cf063930c44b1c0fec89b40ad4
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 7b116131a8fe4924698b92086393eacd
   m_configObjects: {}

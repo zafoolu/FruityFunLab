@@ -80,14 +80,16 @@ public class EndscreenManager : MonoBehaviour
     
     int GetLevelTargetPoints(string sceneName)
     {
+
+        PersonaManager personaManager = FindObjectOfType<PersonaManager>();
         switch (sceneName)
         {
             case "Level1":
-                return maxPointsLevel1; // Zielpunkte für Level 1
+                return personaManager.currentPersona.maxScore; // Zielpunkte für Level 1
             case "Level2":
-                return maxPointsLevel2; // Zielpunkte für Level 2
+                return personaManager.currentPersona.maxScore; // Zielpunkte für Level 2
             case "Level3":
-                return maxPointsLevel3; // Zielpunkte für Level 3
+                return personaManager.currentPersona.maxScore;; // Zielpunkte für Level 3
             default:
                 return 60; // Standardwert
         }
@@ -100,7 +102,7 @@ public class EndscreenManager : MonoBehaviour
 
     
         bool isHandEmpty = handPanel.transform.childCount == 0;  
-        bool isClickCountNine = deckManager.clickCount == 9; 
+        bool isClickCountNine = deckManager.clickCount == deckManager.maxCards; 
         bool isScoreNotMatching = Draggable.totalPoints < levelTargetPoints;  
 
         if (isHandEmpty && isClickCountNine && isScoreNotMatching)
@@ -183,21 +185,52 @@ public class EndscreenManager : MonoBehaviour
             endscreenPanel.SetActive(false);
         }
 
+        // Aktuelle Szene abrufen
         Scene currentScene = SceneManager.GetActiveScene();
         string currentSceneName = currentScene.name;
 
-        switch (currentSceneName)
+        // Prüfen, ob die aktuelle Szene ein Level ist
+        if (currentSceneName.StartsWith("Level"))
         {
-            case "Level1":
-                SceneManager.LoadScene("Level2");
-                break;
-            case "Level2":
-                SceneManager.LoadScene("Level3");
-                break;
-            default:
-                Debug.Log("Keine nächste Szene definiert!");
-                break;
+            int currentLevelNumber;
+            if (int.TryParse(currentSceneName.Substring(5), out currentLevelNumber))
+            {
+                // Nächsten Levelnamen berechnen
+                string nextSceneName = "Level" + (currentLevelNumber + 1);
+
+                // Prüfen, ob die nächste Szene existiert
+                if (SceneExists(nextSceneName))
+                {
+                    SceneManager.LoadScene(nextSceneName);
+                }
+                else
+                {
+                    Debug.Log("Keine nächste Szene definiert!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Die aktuelle Szene hat keinen gültigen Levelnamen!");
+            }
         }
+        else
+        {
+            Debug.Log("Die aktuelle Szene ist kein Level!");
+        }
+    }
+
+    private bool SceneExists(string sceneName)
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string scene = System.IO.Path.GetFileNameWithoutExtension(path);
+            if (scene == sceneName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     
