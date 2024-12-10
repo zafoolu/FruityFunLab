@@ -285,6 +285,8 @@ public void Play()
     {
         if (fruitCount >= 2)
         {
+            AnimationManager animationManager = FindObjectOfType<AnimationManager>();
+            animationManager.TriggerObstSalatAnimation();
             comboMultiplier = Mathf.Max(comboMultiplier, 2f);
         }
 
