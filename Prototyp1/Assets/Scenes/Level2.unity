@@ -6615,6 +6615,16 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: angry_sound
+    clip: {fileID: 8300000, guid: 8f305507ab58d924a9e6207319a54e6b, type: 3}
+    volume: 0.25
+    pitch: 1
+    source: {fileID: 0}
+  - name: happy_sound
+    clip: {fileID: 8300000, guid: 0b9107eecbc234546a82cc381e07928c, type: 3}
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &1638091871
 Transform:
   m_ObjectHideFlags: 0

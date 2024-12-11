@@ -263,6 +263,7 @@ public void Play()
             sadReaction.SetActive(true);
             neutralReaction.SetActive(false);
             happyReaction.SetActive(false);
+            FindObjectOfType<AudioManager>().Play("angry_sound");
         }
 
         switch (card.foodType.ToLower())
@@ -305,6 +306,7 @@ public void Play()
             happyReaction.SetActive(true);
             neutralReaction.SetActive(false);
             sadReaction.SetActive(false);
+            FindObjectOfType<AudioManager>().Play("happy_sound");
         }
         else
         {
